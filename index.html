@@ -5,37 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alexander Shvedov | Personal CV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
     <style>
         :root {
-            --primary: #3498db;
-            --secondary: #2ecc71;
-            --accent: #e74c3c;
-            --light: #34495e;
-            --dark: #111;
-            --darker: #000;
-            --light-text: #ecf0f1;
-            --dark-text: #bdc3c7;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            --primary: #b31b1b;
+            --secondary: #1f4e5f;
+            --accent: #8a6f3b;
+            --light: #ede6d8;
+            --dark: #ffffff;
+            --darker: #f9f6ef;
+            --light-text: #1f1f1f;
+            --dark-text: #3d3d3d;
+            --muted-text: #6b6b6b;
+            --shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+            --font-serif: 'Source Serif 4', 'Iowan Old Style', 'Palatino', 'Times New Roman', serif;
+            --font-sans: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            --content-width: 68ch;
+            --content-max: 960px;
+            --content-gutter: clamp(20px, 3vw, 32px);
+            --section-gap: clamp(16px, 2.6vw, 24px);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            font-size: 18px;
         }
 
         body {
-            background-color: var(--darker);
+            background-color: #7e8782;
             color: var(--light-text);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
+            font-size: 1rem;
+            font-family: var(--font-serif);
+            text-rendering: optimizeLegibility;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: 0.01em;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+        }
+
+        h5 {
+            font-size: 1.1rem;
+        }
+
+        h6 {
+            font-size: 1rem;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: var(--content-max);
             margin: 0 auto;
-            padding: 20px;
+            padding: 32px var(--content-gutter) 60px;
         }
 
         /* Language toggle button styles */
@@ -45,16 +92,16 @@
             right: 20px;
             z-index: 1000;
             display: flex;
-            background: rgba(30, 30, 30, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border-radius: 30px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .language-toggle:hover {
-            background: rgba(50, 50, 50, 0.9);
+            background: rgba(255, 255, 255, 0.98);
             transform: translateY(-2px);
         }
 
@@ -64,8 +111,11 @@
             background: transparent;
             border: none;
             cursor: pointer;
-            font-family: 'Consolas', monospace;
+            font-family: var(--font-sans);
             font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
             transition: all 0.3s ease;
         }
 
@@ -76,7 +126,7 @@
 
         header {
             background: var(--darker);
-            color: white;
+            color: var(--light-text);
             padding: 40px 0;
             text-align: center;
             border-radius: 0 0 20px 20px;
@@ -84,19 +134,19 @@
             position: relative;
             overflow: hidden;
             margin-top: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
 
         .avatar {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 5px solid rgba(255,255,255,0.1);
+            border: 5px solid rgba(0, 0, 0, 0.08);
             object-fit: cover;
             margin-bottom: 20px;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
-            background-color: #222;
+            background-color: #f0ece3;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -104,19 +154,28 @@
             color: var(--primary);
         }
 
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
         h1 {
-            font-size: 2.5rem;
             margin-bottom: 10px;
+            letter-spacing: 0.02em;
             animation: fadeIn 1s ease;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
 
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1.35rem;
+            line-height: 1.6;
             opacity: 0.9;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
+            max-width: 50ch;
             animation: fadeIn 1.5s ease;
-            color: var(--dark-text);
+            color: var(--muted-text);
         }
 
         .contact-info {
@@ -131,18 +190,20 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(30, 30, 30, 0.7);
+            background: rgba(255, 255, 255, 0.92);
             padding: 8px 15px;
             border-radius: 20px;
             transition: all 0.3s ease;
             color: var(--light-text);
+            font-size: 0.95rem;
+            font-family: var(--font-sans);
             cursor: pointer;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .contact-item:hover {
-            background: rgba(50, 50, 50, 0.7);
+            background: rgba(250, 248, 242, 0.98);
             transform: translateY(-3px);
         }
 
@@ -177,13 +238,16 @@
         section {
             background: var(--dark);
             border-radius: 10px;
-            padding: 30px;
-            margin: 30px 0;
+            padding: clamp(26px, 3vw, 36px);
+            margin: 36px 0;
             box-shadow: var(--shadow);
             transform: translateY(20px);
             opacity: 0;
             transition: all 0.6s ease;
             border-left: 3px solid var(--primary);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            display: grid;
+            gap: var(--section-gap);
         }
 
         section.visible {
@@ -193,10 +257,10 @@
 
         h2 {
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             position: relative;
             padding-bottom: 10px;
-            font-size: 1.8rem;
+            letter-spacing: 0.01em;
         }
 
         h2::after {
@@ -211,24 +275,106 @@
 
         h3 {
             color: var(--light-text);
-            margin: 15px 0 10px;
-            font-size: 1.3rem;
+            margin: 22px 0 12px;
         }
 
         p, li {
             color: var(--dark-text);
+            max-width: var(--content-width);
+            hyphens: auto;
+            overflow-wrap: break-word;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        p + p {
+            margin-top: 0.75rem;
+        }
+
+        p.lead {
+            color: var(--light-text);
+            font-size: 1.05rem;
+            font-family: var(--font-sans);
+            letter-spacing: 0.01em;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 0 0 1.1rem;
+            padding-left: 1.4rem;
+            max-width: var(--content-width);
+            list-style-position: outside;
+        }
+
+        ul {
+            list-style-type: disc;
+        }
+
+        ol {
+            list-style-type: decimal;
+        }
+
+        li {
+            margin: 0.45rem 0;
+            padding-left: 0.15rem;
+        }
+
+        li::marker {
+            color: var(--secondary);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: underline;
+            text-decoration-color: rgba(179, 27, 27, 0.6);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--secondary);
+            text-decoration-color: rgba(31, 78, 95, 0.8);
+        }
+
+        a:visited {
+            color: #6b4b8a;
+            text-decoration-color: rgba(107, 75, 138, 0.6);
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        blockquote {
+            margin: 1.2rem 0;
+            padding: 1rem 1.2rem;
+            border-left: 4px solid var(--accent);
+            background: rgba(179, 27, 27, 0.06);
+            color: var(--light-text);
+            font-style: italic;
+            max-width: var(--content-width);
+        }
+
+        blockquote p {
+            margin: 0;
         }
 
         .context-description {
-            font-family: 'Consolas', monospace;
-            background-color: rgba(0,0,0,0.3);
-            padding: 15px;
+            font-family: var(--font-sans);
+            background-color: rgba(179, 27, 27, 0.06);
+            padding: 16px 18px;
             border-radius: 5px;
             border-left: 3px solid var(--accent);
-            margin: 15px 0;
-            color: #7fdbca;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            margin: 8px 0 4px;
+            color: #1f4e5f;
+            font-size: 0.97rem;
+            line-height: 1.6;
+            max-width: var(--content-width);
         }
 
         .skills-grid {
@@ -238,12 +384,12 @@
         }
 
         .skill-category {
-            background: rgba(30, 30, 30, 0.7);
+            background: rgba(255, 255, 255, 0.92);
             padding: 20px;
             border-radius: 8px;
             border-left: 4px solid var(--secondary);
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .skill-category:hover {
@@ -270,9 +416,9 @@
         }
 
         .experience-item {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px dashed rgba(255,255,255,0.1);
+            margin-bottom: 32px;
+            padding-bottom: 22px;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
         }
 
         .experience-item:last-child {
@@ -291,11 +437,14 @@
         .company {
             font-weight: bold;
             color: var(--light-text);
+            font-size: 1.05rem;
+            font-family: var(--font-sans);
         }
 
         .date {
             color: var(--secondary);
             font-style: italic;
+            font-family: var(--font-sans);
         }
 
         .contributions {
@@ -303,14 +452,14 @@
         }
 
         .contribution-item {
-            background: rgba(30, 30, 30, 0.7);
+            background: rgba(255, 255, 255, 0.92);
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 10px;
             display: flex;
             gap: 15px;
             align-items: flex-start;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .contribution-icon {
@@ -319,29 +468,88 @@
             margin-top: 3px;
         }
 
-        .badges {
+        .tag-cloud {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px 14px;
+            justify-content: center;
             margin-top: 20px;
+            max-width: 100%;
+            padding: 8px 0;
         }
 
-        .badge {
-            background: var(--primary);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.3s ease;
+        .tag-cloud .tag {
+            color: var(--dark-text);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            text-decoration: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
+            will-change: transform;
         }
 
-        .badge:hover {
-            background: var(--accent);
-            transform: scale(1.05);
+        .tag-cloud .tag:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
         }
+
+        .tag-cloud .tag.size-xl {
+            font-size: 2.4rem;
+        }
+
+        .tag-cloud .tag.size-lg {
+            font-size: 1.9rem;
+        }
+
+        .tag-cloud .tag.size-md {
+            font-size: 1.4rem;
+        }
+
+        .tag-cloud .tag.size-sm {
+            font-size: 1.05rem;
+        }
+
+        .tag-cloud .tag.size-xs {
+            font-size: 0.9rem;
+            color: var(--muted-text);
+            font-weight: 500;
+        }
+
+        .tag-cloud.is-interactive {
+            position: relative;
+            display: block;
+            height: clamp(280px, 35vw, 420px);
+            overflow: hidden;
+            padding: 12px;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+        }
+
+        .tag-cloud.is-interactive .tag {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(calc(-50% + var(--tag-x, 0)), calc(-50% + var(--tag-y, 0)), 0) scale(var(--tag-scale, 1));
+            opacity: var(--tag-opacity, 1);
+            transition: color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+            transform-origin: center;
+        }
+
+        .tag-cloud.is-interactive .tag:hover {
+            transform: translate3d(var(--tag-x, 0), var(--tag-y, 0), 0) scale(calc(var(--tag-scale, 1) * 1.08));
+        }
+
+        .tag-cloud.is-interactive.is-dragging {
+            cursor: grabbing;
+        }
+
+
+        .tag-cloud.is-interactive.is-dragging .tag {
+            transition: none !important;
+        }
+
 
         footer {
             text-align: center;
@@ -350,14 +558,22 @@
             opacity: 0.7;
         }
 
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
         .availability {
             display: inline-block;
-            background: rgba(46, 204, 113, 0.2);
+            background: rgba(31, 78, 95, 0.12);
             color: var(--secondary);
             padding: 8px 15px;
             border-radius: 20px;
             margin-top: 10px;
             animation: pulse 2s infinite;
+            font-size: 0.95rem;
+            max-width: var(--content-width);
+            font-family: var(--font-sans);
         }
 
         @keyframes pulse {
@@ -367,7 +583,7 @@
         }
 
         .code-snippet {
-            background: #000;
+            background: #181818;
             color: #d6deeb;
             padding: 15px;
             border-radius: 8px;
@@ -375,7 +591,7 @@
             margin: 15px 0;
             overflow-x: auto;
             position: relative;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
         }
 
         .code-snippet::before {
@@ -383,7 +599,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.45);
             padding: 3px 10px;
             border-radius: 0 8px 0 8px;
             font-size: 0.8rem;
@@ -400,14 +616,14 @@
         }
 
         .terminal {
-            background: #000;
+            background: #181818;
             color: #d6deeb;
             padding: 15px;
             border-radius: 8px;
             font-family: 'Consolas', monospace;
             margin: 15px 0;
             position: relative;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
         }
 
         .terminal::before {
@@ -434,6 +650,15 @@
             .skills-grid {
                 grid-template-columns: 1fr;
             }
+
+            .container {
+                padding: 24px 16px 48px;
+            }
+
+            section {
+                padding: 24px 20px;
+                margin: 28px 0;
+            }
             
             .experience-header {
                 flex-direction: column;
@@ -441,7 +666,7 @@
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 2.1rem;
             }
 
             .language-toggle {
@@ -489,11 +714,11 @@
         <section id="about">
             <h2 class="lang-en">About</h2>
             <h2 class="lang-ru">About</h2>
-            <p class="lang-en">Security and certification specialist with experience on both sides of the table—formerly at a testing laboratory, now as an applicant.
+            <p class="lang-en lead">Security and certification specialist with experience on both sides of the table - formerly at a testing laboratory, now as an applicant.
 			On the side, I research video-format projects and contribute to/open-source security work (AFL++, Node.js, Python, Cppcheck, GPAC, JPEG XL).
 			Currently building structure-aware mutators, token dictionaries for dynamic testing, and no-code binary researching tools on LLMs based.
 			</p>
-            <p class="lang-ru">Участие в сертификации различных продуктов из реестра СЗИ ФСТЭК: в качестве сотрудника испытательной лаборатории (ранее); в качестве заявителя - сейчас.
+            <p class="lang-ru lead">Участие в сертификации различных продуктов из реестра СЗИ ФСТЭК: в качестве сотрудника испытательной лаборатории (ранее); в качестве заявителя - сейчас.
 Большой опыт проведения сертификаций по  "Методике  ВУиНДВ" с первой её редакции, в связи с чем, объем практик, с которыми сталкивался в работе, достаточно обширен.
 Факультативно: занимаюсь исследованием нескольких проектов, связанных с видео-форматами. В наличии так же опыт контрибьютинга и поиска уязвимостей в публичных проектах (AFL++, Nodejs, Python, Cppcheck, GPAC, JPEG XL). 
 На данный момент занимаюсь разработками structure-aware мутаторов и словарей токенов для фаззинга, а так же no-code инструментов бинарного анализа на основе LLM.
@@ -511,10 +736,10 @@
                     <span class="company lang-ru">АО Аладдин Р.Д.</span>
                     <span class="date">2023 - Present</span>
                 </div>
-                <h3 class="lang-en">Secure Development Specialist</h3>
-                <h3 class="lang-ru">Специалист обеспечения безопасной разработки</h3>
-                <p class="lang-en">Conducting comprehensive security assessments in accordance with FSTEC regulations</p>
-                <p class="lang-ru">Проведение комплексных оценок безопасности в соответствии с нормативами ФСТЭК</p>   
+                <h3 class="lang-en">AppSec</h3>
+                <h3 class="lang-ru">AppSec</h3>
+                <p class="lang-en lead">Conducting comprehensive security assessments in accordance with FSTEC regulations</p>
+                <p class="lang-ru lead">Проведение комплексных оценок безопасности в соответствии с нормативами ФСТЭК</p>   
                 <div class="context-description lang-ru">
 				- первичный аудит безопасности ОО, перед передачей на исследования по ВУиНДВ,<br>
 				- обеспечение непрерывность работы группы по всем направлениям её деятельности;<br>
@@ -532,66 +757,66 @@
         <section id="contributions">
             <h2 class="lang-en">Open-source contributions</h2>
             <h2 class="lang-ru">Контрибьюция в open-source проекты</h2>
-            <p class="lang-en">Experience in contributing to opensource projects and opensource bug trackers for non-NDA projects</p>
-            <p class="lang-ru">Опыт контрибьютинга в opensource-проекты и баг-треккеры opensource для проектов не под NDA:</p>
-            <div class="badges">
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2022-01054">BDU:2022-01054</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2023-00633">BDU:2023-00633</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2023-00391">BDU:2023-00391</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2023-00622">BDU:2023-00622</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2023-00634">BDU:2023-00634</a>(<a href="https://nvd.nist.gov/vuln/detail/CVE-2023-0645">CVE-2023-0645</a>)	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2023-01808">BDU:2023-01808</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-03992">BDU:2025-03992</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-03990">BDU:2025-03990</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-03139">BDU:2025-03139</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-03993">BDU:2025-03993</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-05039">BDU:2025-05039</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-05041">BDU:2025-05041</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-05040">BDU:2025-05040</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08051">BDU:2025-08051</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08045">BDU:2025-08045</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08047">BDU:2025-08047</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08048">BDU:2025-08048</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08049">BDU:2025-08049</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08050">BDU:2025-08050</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08581">BDU:2025-08581</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08580">BDU:2025-08580</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08566">BDU:2025-08566</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08562">BDU:2025-08562</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08567">BDU:2025-08567</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08563">BDU:2025-08563</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08565">BDU:2025-08565</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i>	<a href="https://bdu.fstec.ru/vul/2025-08564">BDU:2025-08564</a>	</div>
-<div class="badge"><i class="fas fa-bug"></i> 	<a href="https://bdu.fstec.ru/vul/2025-08613">BDU:2025-08613</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i> 	<a href="https://bdu.fstec.ru/vul/2025-08611">BDU:2025-08611</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i> 	<a href="https://bdu.fstec.ru/vul/2025-08612">BDU:2025-08612</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i> 	<a href="https://bdu.fstec.ru/vul/2025-08614">BDU:2025-08614</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i> 	<a href="https://bdu.fstec.ru/vul/2025-08615">BDU:2025-08615</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i> 	<a href="https://bdu.fstec.ru/vul/2025-08616">BDU:2025-08616</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i> 	<a href="https://bdu.fstec.ru/vul/2025-08617">BDU:2025-08617</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-09346">BDU:2025-09346</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-09878">BDU:2025-09878</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-09882">BDU:2025-09882</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-09883">BDU:2025-09883</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-09884">BDU:2025-09884</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-09885">BDU:2025-09885</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-09886">BDU:2025-09886</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10075">BDU:2025-10075</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10076">BDU:2025-10076</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10077">BDU:2025-10077</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10078">BDU:2025-10078</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10079">BDU:2025-10079</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10080">BDU:2025-10080</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10081">BDU:2025-10081</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10082">BDU:2025-10082</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10083">BDU:2025-10083</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10084">BDU:2025-10084</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10085">BDU:2025-10085</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10086">BDU:2025-10086</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10087">BDU:2025-10087</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10088">BDU:2025-10088</a>	 </div>
-<div class="badge"><i class="fas fa-bug"></i>   <a href="https://bdu.fstec.ru/vul/2025-10089">BDU:2025-10089</a>	 </div>
-
+            <p class="lang-en lead">Experience in contributing to opensource projects and opensource bug trackers for non-NDA projects</p>
+            <p class="lang-ru lead">Опыт контрибьютинга в opensource-проекты и баг-треккеры opensource для проектов не под NDA:</p>
+            <div class="tag-cloud" aria-label="BDU tag cloud">
+                <a class="tag size-xl" href="https://bdu.fstec.ru/vul/2022-01054">BDU:2022-01054</a>
+                <a class="tag size-lg" href="https://bdu.fstec.ru/vul/2023-00633">BDU:2023-00633</a>
+                <a class="tag size-lg" href="https://bdu.fstec.ru/vul/2023-00391">BDU:2023-00391</a>
+                <a class="tag size-md" href="https://bdu.fstec.ru/vul/2023-00622">BDU:2023-00622</a>
+                <a class="tag size-md" href="https://bdu.fstec.ru/vul/2023-00634">BDU:2023-00634</a>
+                <a class="tag size-sm" href="https://nvd.nist.gov/vuln/detail/CVE-2023-0645">CVE-2023-0645</a>
+                <a class="tag size-md" href="https://bdu.fstec.ru/vul/2023-01808">BDU:2023-01808</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-03992">BDU:2025-03992</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-03990">BDU:2025-03990</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-03139">BDU:2025-03139</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-03993">BDU:2025-03993</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-05039">BDU:2025-05039</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-05041">BDU:2025-05041</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-05040">BDU:2025-05040</a>
+                <a class="tag size-md" href="https://bdu.fstec.ru/vul/2025-08051">BDU:2025-08051</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08045">BDU:2025-08045</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-08047">BDU:2025-08047</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08048">BDU:2025-08048</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-08049">BDU:2025-08049</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08050">BDU:2025-08050</a>
+                <a class="tag size-md" href="https://bdu.fstec.ru/vul/2025-08581">BDU:2025-08581</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08580">BDU:2025-08580</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-08566">BDU:2025-08566</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08562">BDU:2025-08562</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-08567">BDU:2025-08567</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08563">BDU:2025-08563</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-08565">BDU:2025-08565</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08564">BDU:2025-08564</a>
+                <a class="tag size-md" href="https://bdu.fstec.ru/vul/2025-08613">BDU:2025-08613</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08611">BDU:2025-08611</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08612">BDU:2025-08612</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-08614">BDU:2025-08614</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-08615">BDU:2025-08615</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-08616">BDU:2025-08616</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-08617">BDU:2025-08617</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-09346">BDU:2025-09346</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-09878">BDU:2025-09878</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-09882">BDU:2025-09882</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-09883">BDU:2025-09883</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-09884">BDU:2025-09884</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-09885">BDU:2025-09885</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-09886">BDU:2025-09886</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-10075">BDU:2025-10075</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10076">BDU:2025-10076</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10077">BDU:2025-10077</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-10078">BDU:2025-10078</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10079">BDU:2025-10079</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10080">BDU:2025-10080</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10081">BDU:2025-10081</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10082">BDU:2025-10082</a>
+                <a class="tag size-sm" href="https://bdu.fstec.ru/vul/2025-10083">BDU:2025-10083</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10084">BDU:2025-10084</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10085">BDU:2025-10085</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10086">BDU:2025-10086</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10087">BDU:2025-10087</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10088">BDU:2025-10088</a>
+                <a class="tag size-xs" href="https://bdu.fstec.ru/vul/2025-10089">BDU:2025-10089</a>
             </div>
             
         </section>
@@ -713,7 +938,219 @@
                 console.error('Could not copy text: ', err);
             });
         }
+
+                function initInteractiveTagCloud() {
+            const cloud = document.querySelector('.tag-cloud');
+            if (!cloud) return;
+
+            const tags = Array.from(cloud.querySelectorAll('.tag'));
+            if (!tags.length) return;
+
+            cloud.classList.add('is-interactive');
+
+            let width = 0;
+            let height = 0;
+            let radius = 0;
+
+            const perspective = 480;
+
+            // Auto-rotation (same idea as before)
+            const autoRotate = { x: 0.0015, y: 0.0024 };
+
+            // Drag sensitivity
+            const dragSpeed = 0.005;
+
+            // Inertia / smooth "coast" after release
+            const inertia = { x: 0, y: 0 };
+            const friction = 0.92;          // 0.88..0.96 (lower = faster decay)
+            const minInertia = 0.000015;    // stop threshold
+            const inertiaLerp = 0.35;       // 0.2..0.5 (higher = more "viscous")
+
+            let isHovering = false;
+            let isDragging = false;
+
+            let lastPointer = null;
+            let pendingDX = 0;
+            let pendingDY = 0;
+            let dragRAF = 0;
+
+            const tagStates = tags.map((tag, index) => {
+                const count = tags.length;
+                const phi = Math.acos(1 - 2 * (index + 0.5) / count);
+                const theta = Math.PI * (1 + Math.sqrt(5)) * (index + 0.5);
+                return {
+                    el: tag,
+                    x: Math.cos(theta) * Math.sin(phi),
+                    y: Math.sin(theta) * Math.sin(phi),
+                    z: Math.cos(phi)
+                };
+            });
+
+            const setBounds = () => {
+                const rect = cloud.getBoundingClientRect();
+                width = rect.width;
+                height = rect.height;
+                radius = Math.max(120, Math.min(width, height) / 2 - 24);
+            };
+
+            const rotateY = (state, angle) => {
+                const cos = Math.cos(angle);
+                const sin = Math.sin(angle);
+                const x = state.x * cos + state.z * sin;
+                const z = -state.x * sin + state.z * cos;
+                state.x = x;
+                state.z = z;
+            };
+
+            const rotateX = (state, angle) => {
+                const cos = Math.cos(angle);
+                const sin = Math.sin(angle);
+                const y = state.y * cos - state.z * sin;
+                const z = state.y * sin + state.z * cos;
+                state.y = y;
+                state.z = z;
+            };
+
+            const render = () => {
+                const centerX = width / 2;
+                const centerY = height / 2;
+
+                tagStates.forEach(state => {
+                    const depth = perspective / (perspective - state.z * radius);
+                    const x = state.x * radius * depth;
+                    const y = state.y * radius * depth;
+                    const opacity = Math.min(1, Math.max(0.35, (depth - 0.5) / 1.5));
+
+                    state.el.style.setProperty('--tag-x', `${x}px`);
+                    state.el.style.setProperty('--tag-y', `${y}px`);
+                    state.el.style.setProperty('--tag-scale', depth.toFixed(3));
+                    state.el.style.setProperty('--tag-opacity', opacity.toFixed(3));
+                    state.el.style.zIndex = Math.round(depth * 100);
+                });
+
+                cloud.style.setProperty('--center-x', `${centerX}px`);
+                cloud.style.setProperty('--center-y', `${centerY}px`);
+            };
+
+            const applyRotation = (ax, ay) => {
+                if (!ax && !ay) return;
+                tagStates.forEach(state => {
+                    rotateY(state, ay);
+                    rotateX(state, ax);
+                });
+            };
+
+            const applyDrag = () => {
+                dragRAF = 0;
+                if (!isDragging) {
+                    pendingDX = 0;
+                    pendingDY = 0;
+                    return;
+                }
+                if (pendingDX === 0 && pendingDY === 0) return;
+
+                const angleY = pendingDX * dragSpeed;
+                const angleX = pendingDY * dragSpeed;
+
+                pendingDX = 0;
+                pendingDY = 0;
+
+                // Smoothly feed inertia from drag impulses (reduces "jitter")
+                inertia.y = inertia.y * (1 - inertiaLerp) + angleY * inertiaLerp;
+                inertia.x = inertia.x * (1 - inertiaLerp) + angleX * inertiaLerp;
+
+                applyRotation(angleX, angleY);
+                render();
+            };
+
+            const animate = () => {
+                if (!isDragging) {
+                    // Inertia has priority (even when hovering)
+                    if (Math.abs(inertia.x) > minInertia || Math.abs(inertia.y) > minInertia) {
+                        applyRotation(inertia.x, inertia.y);
+                        inertia.x *= friction;
+                        inertia.y *= friction;
+                    } else {
+                        inertia.x = 0;
+                        inertia.y = 0;
+
+                        // Auto-rotate only when not hovering (same behavior as before)
+                        if (!isHovering) {
+                            applyRotation(autoRotate.x, autoRotate.y);
+                        }
+                    }
+                }
+
+                render();
+                requestAnimationFrame(animate);
+            };
+
+            const onPointerEnter = () => { isHovering = true; };
+
+            const onPointerLeave = () => {
+                isHovering = false;
+                isDragging = false;
+                lastPointer = null;
+                pendingDX = 0;
+                pendingDY = 0;
+                cloud.classList.remove('is-dragging');
+            };
+
+            const onPointerDown = (event) => {
+                isDragging = true;
+                lastPointer = { x: event.clientX, y: event.clientY };
+                pendingDX = 0;
+                pendingDY = 0;
+                inertia.x = 0;
+                inertia.y = 0;
+
+                cloud.classList.add('is-dragging');
+                cloud.setPointerCapture(event.pointerId);
+            };
+
+            const onPointerMove = (event) => {
+                if (!isDragging || !lastPointer) return;
+
+                const dx = event.clientX - lastPointer.x;
+                const dy = event.clientY - lastPointer.y;
+                lastPointer = { x: event.clientX, y: event.clientY };
+
+                pendingDX += dx;
+                pendingDY += dy;
+
+                if (!dragRAF) dragRAF = requestAnimationFrame(applyDrag);
+            };
+
+            const onPointerUp = (event) => {
+                isDragging = false;
+                lastPointer = null;
+                pendingDX = 0;
+                pendingDY = 0;
+
+                cloud.classList.remove('is-dragging');
+                try { cloud.releasePointerCapture(event.pointerId); } catch (_) {}
+            };
+
+            cloud.addEventListener('pointerenter', onPointerEnter);
+            cloud.addEventListener('pointerleave', onPointerLeave);
+            cloud.addEventListener('pointerdown', onPointerDown);
+            cloud.addEventListener('pointermove', onPointerMove);
+            cloud.addEventListener('pointerup', onPointerUp);
+            cloud.addEventListener('pointercancel', onPointerUp);
+
+            window.addEventListener('resize', () => {
+                setBounds();
+                render();
+            });
+
+            setBounds();
+            render();
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('load', () => {
+            initInteractiveTagCloud();
+        });
     </script>
 </body>
 </html>
-
