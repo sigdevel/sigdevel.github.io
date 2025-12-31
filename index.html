@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en" data-lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -684,9 +684,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Language-specific content styles */
-        .lang-en { display: block; }
-        .lang-ru { display: none; }
+        /* Language: attribute-driven visibility (no forced display:block) */
+        html[data-lang="en"] .lang-ru { display: none !important; }
+        html[data-lang="ru"] .lang-en { display: none !important; }
+
+        /* View Transitions: smooth language cross-fade */
+        @supports (view-transition-name: none) {
+            ::view-transition-old(root) { animation: vt-fade-out 180ms ease both; }
+            ::view-transition-new(root) { animation: vt-fade-in 180ms ease both; }
+        }
+        @keyframes vt-fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes vt-fade-out { from { opacity: 1; } to { opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-old(root),
+            ::view-transition-new(root) { animation-duration: 1ms !important; }
+        }
 
         @media (max-width: 768px) {
             .skills-grid {
@@ -826,9 +838,142 @@
         @media (prefers-reduced-motion: reduce){
             .hero-pm5544{ display:none; }
         }
+
+        /* === Subtle SVG “glitch” (controlled distortion) === */
+        .glitch-filters{
+            position:absolute;
+            width:0;
+            height:0;
+            overflow:hidden;
+            pointer-events:none;
+        }
+
+        /* Keep avatar circular even with displacement */
+        .avatar{ overflow:hidden; }
+
+        /* Opt-in targets are tagged by JS */
+        .glitchable{
+            will-change: filter, transform;
+            transform: translateZ(0);
+        }
+
+        /* A tiny physical “float” to sell the wobble (no layout shift) */
+        .glitch-avatar.is-glitching{
+            transform: translate3d(0, -1px, 0);
+        }
+        .glitch-text.is-glitching{
+            transform: translate3d(0, -0.5px, 0);
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            .glitchable,
+            .glitchable.is-glitching{
+                filter:none !important;
+                transform:none !important;
+            }
+        }
+
+
+
+        /* === Houdini Paint: procedural “engineering” background (grid/noise/scope) === */
+        :root{
+            /* Tweakables (numbers are unitless on purpose; worklet treats them as px / coeffs) */
+            --eng-bg-grid: 28;              /* minor grid step (px) */
+            --eng-bg-major: 112;            /* major grid step (px) */
+            --eng-bg-hatch: 160;            /* diagonal hatch spacing (px) */
+            --eng-bg-seed: 1337;            /* deterministic seed */
+            --eng-bg-dpr: 1;                /* set by JS (capped) */
+            --eng-bg-phase: 0;              /* animated by CSS (optional) */
+
+            /* Opacity controls (0..1) — keep these subtle */
+            --eng-bg-grid-alpha: 0.055;
+            --eng-bg-major-alpha: 0.080;
+            --eng-bg-hatch-alpha: 0.035;
+            --eng-bg-noise-alpha: 0.028;
+            --eng-bg-scope-alpha: 0.055;
+            --eng-bg-scope-thickness: 1.15;
+            --eng-bg-cal-alpha: 0.050;      /* “PM5544-ish” calibration marks */
+        }
+
+        @supports (background-image: paint(engineeringBG)) {
+            /* Base color is already set on body; paint() is layered on top */
+            body{
+                background-image: paint(engineeringBG);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+            }
+
+            /* Allow smooth animation of a numeric custom property (when supported) */
+            @property --eng-bg-phase {
+                syntax: '<number>';
+                inherits: true;
+                initial-value: 0;
+            }
+
+            @media (prefers-reduced-motion: no-preference){
+                body{
+                    animation: engBgPhase 14s linear infinite;
+                }
+            }
+
+            @keyframes engBgPhase{
+                from { --eng-bg-phase: 0; }
+                to   { --eng-bg-phase: 6.28318; } /* 2π */
+            }
+        }
+
+        /* Fallback for browsers without the Painting API */
+        @supports not (background-image: paint(engineeringBG)) {
+            body{
+                background-image:
+                    repeating-linear-gradient(0deg,  rgba(0,0,0,0.030) 0 1px, transparent 1px 28px),
+                    repeating-linear-gradient(90deg, rgba(0,0,0,0.030) 0 1px, transparent 1px 28px),
+                    repeating-linear-gradient(45deg, rgba(0,0,0,0.020) 0 1px, transparent 1px 160px),
+                    radial-gradient(circle at 50% 32%, rgba(0,0,0,0.055), transparent 60%);
+                background-attachment: fixed;
+            }
+        }
+
 </style>
 </head>
 <body>
+
+    <!-- Subtle SVG displacement “glitch” filters (used on hover for headings/avatar) -->
+    <svg class="glitch-filters" aria-hidden="true" focusable="false" width="0" height="0">
+        <filter id="glitch-text" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence id="glitchTextTurb"
+                type="fractalNoise"
+                baseFrequency="0.008 0.020"
+                numOctaves="1"
+                seed="2"
+                stitchTiles="stitch"
+                result="noise"/>
+            <feDisplacementMap id="glitchTextDisp"
+                in="SourceGraphic"
+                in2="noise"
+                scale="0"
+                xChannelSelector="R"
+                yChannelSelector="G"/>
+        </filter>
+
+        <filter id="glitch-avatar" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence id="glitchAvatarTurb"
+                type="fractalNoise"
+                baseFrequency="0.010 0.030"
+                numOctaves="1"
+                seed="7"
+                stitchTiles="stitch"
+                result="noise2"/>
+            <feDisplacementMap id="glitchAvatarDisp"
+                in="SourceGraphic"
+                in2="noise2"
+                scale="0"
+                xChannelSelector="R"
+                yChannelSelector="G"/>
+        </filter>
+    </svg>
+
     <!-- Language toggle button -->
     <div class="language-toggle">
         <button class="language-btn active" data-lang="en">EN</button>
@@ -978,23 +1123,9 @@
             <h2 class="lang-en">Current Availability</h2>
             <h2 class="lang-ru">Текущая доступность</h2>
             <div class="availability">
-                <i class="fas fa-handshake"></i> <span class="lang-en">Available for part time/contract work - see contacts to contact me</span><span class="lang-ru">Доступен для частичной занятости/контрактной работе - смотрите контакты для связи со мной</span>
+                <i class="fas fa-handshake"></i> <span class="lang-en">Available for contract work</span><span class="lang-ru">Доступен для контрактной работе</span>
             </div>
             
-            <div class="context-description" style="margin-top: 15px;">
-                <div class="lang-en">
-                    // Preferred project parameters:<br>
-                    - Duration: 1-6 months<br>
-                    - Scope: product safety audit/company infrastructural studies<br>
-                    - Engagement: 10-30 hrs/week<br>
-                </div>
-                <div class="lang-ru">
-                    // Ожидаемые параметры проекта:<br>
-                    - Длительность: 1-6 месяцев<br>
-                    - Область исследований: аудит безопасности продукта/исследования инфрастуктуры компании<br>
-                    - Занятость: 10-30 часов в неделю<br>
-                </div>
-            </div>
         </section>
     </div>
 
@@ -1004,40 +1135,51 @@
     </footer>
 
     <script>
-        const toggleLanguage = (lang) => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        // Apply language purely via <html data-lang="en|ru"> + CSS (no inline display tweaks)
+        const applyLanguage = (lang) => {
+            const root = document.documentElement;
+            root.dataset.lang = lang;
+            root.lang = lang;
+
             document.querySelectorAll('.language-btn').forEach(btn => {
-                if (btn.dataset.lang === lang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            document.querySelectorAll('.lang-en, .lang-ru').forEach(el => {
-                el.style.display = 'none';
-            });
-            document.querySelectorAll(`.lang-${lang}`).forEach(el => {
-                el.style.display = 'block';
+                btn.classList.toggle('active', btn.dataset.lang === lang);
             });
 
-            document.querySelectorAll('section').forEach(section => {
-                if (section.classList.contains('visible')) {
-                    section.classList.remove('visible');
-                    setTimeout(() => {
-                        section.classList.add('visible');
-                    }, 50);
-                }
-            });
+            // Keep existing "reveal" feel, but avoid extra motion when user prefers reduced motion
+            if (!prefersReducedMotion.matches) {
+                document.querySelectorAll('section').forEach(section => {
+                    if (section.classList.contains('visible')) {
+                        section.classList.remove('visible');
+                        setTimeout(() => section.classList.add('visible'), 50);
+                    }
+                });
+            }
+        };
+
+        const setLanguage = (lang) => {
+            const root = document.documentElement;
+            const current = root.dataset.lang || 'en';
+            if (current === lang) return;
+
+            const update = () => applyLanguage(lang);
+
+            // Smooth cross-fade when supported; fallback is instant swap
+            if (!prefersReducedMotion.matches && typeof document.startViewTransition === 'function') {
+                document.startViewTransition(update);
+            } else {
+                update();
+            }
         };
 
         document.querySelectorAll('.language-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                toggleLanguage(btn.dataset.lang);
-            });
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
         });
 
-        toggleLanguage('en');
-
-        const observerOptions = {
+        // Initialize from <html data-lang="...">
+        applyLanguage(document.documentElement.dataset.lang || 'en');
+const observerOptions = {
             threshold: 0.1
         };
 
@@ -1527,9 +1669,369 @@
         }
 
 
+
+        function initSvgGlitch(){
+            // Respect reduced motion
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const turbText   = document.getElementById('glitchTextTurb');
+            const dispText   = document.getElementById('glitchTextDisp');
+            const turbAvatar = document.getElementById('glitchAvatarTurb');
+            const dispAvatar = document.getElementById('glitchAvatarDisp');
+            if (!turbText || !dispText || !turbAvatar || !dispAvatar) return;
+
+            // Targets: all headings + the avatar
+            const headingEls = Array.from(document.querySelectorAll('h1, h2'));
+            headingEls.forEach(el => el.classList.add('glitchable', 'glitch-text'));
+
+            const avatarEl = document.querySelector('header .avatar');
+            if (avatarEl) avatarEl.classList.add('glitchable', 'glitch-avatar');
+
+            const state = {
+                text:   { hover: 0, amp: 0, target: 0, lastSeed: 2 },
+                avatar: { hover: 0, amp: 0, target: 0, lastSeed: 7 },
+                raf: 0,
+                last: 0,
+            };
+
+            const cfg = {
+                text:   { baseX: 0.008, baseY: 0.020, maxScale: 6.5,  turb: turbText,   disp: dispText,   filter: 'url("#glitch-text")' },
+                avatar: { baseX: 0.010, baseY: 0.030, maxScale: 10.0, turb: turbAvatar, disp: dispAvatar, filter: 'url("#glitch-avatar")' },
+            };
+
+            function setActive(type, on){
+                const s = state[type];
+                s.hover = Math.max(0, s.hover + (on ? 1 : -1));
+                s.target = s.hover > 0 ? 1 : 0;
+                if (!state.raf) state.raf = requestAnimationFrame(tick);
+            }
+
+            function bind(el, type){
+                el.addEventListener('pointerenter', () => {
+                    el.style.filter = cfg[type].filter;
+                    el.classList.add('is-glitching');
+                    setActive(type, true);
+                });
+
+                el.addEventListener('pointerleave', () => {
+                    el.style.filter = '';
+                    el.classList.remove('is-glitching');
+                    setActive(type, false);
+                });
+            }
+
+            // Bind headings (text filter)
+            headingEls.forEach(el => bind(el, 'text'));
+            // Bind avatar (avatar filter)
+            if (avatarEl) bind(avatarEl, 'avatar');
+
+            function tick(now){
+                // Throttle ~30fps (cheap + consistent with header mosh)
+                if (now - state.last < 33) {
+                    state.raf = requestAnimationFrame(tick);
+                    return;
+                }
+                state.last = now;
+
+                const t = now / 1000;
+
+                for (const type of ['text', 'avatar']) {
+                    const s = state[type];
+                    const c = cfg[type];
+
+                    // Smooth ramp in/out
+                    s.amp += (s.target - s.amp) * 0.14;
+                    if (s.amp < 0.0008 && s.target === 0) s.amp = 0;
+
+                    // Subtle animated noise
+                    const bfX = c.baseX + (0.0020 * s.amp) * Math.sin(t * 1.15 + (type === 'avatar' ? 0.7 : 0));
+                    const bfY = c.baseY + (0.0060 * s.amp) * Math.cos(t * 1.35 + (type === 'avatar' ? 0.4 : 0));
+                    c.turb.setAttribute('baseFrequency', `${bfX.toFixed(4)} ${bfY.toFixed(4)}`);
+
+                    // Gentle displacement (never “acid glitch”)
+                    const wobble = 0.70 + 0.30 * Math.sin(t * 2.6 + (type === 'avatar' ? 1.2 : 0.2));
+                    const scale = c.maxScale * s.amp * wobble;
+                    c.disp.setAttribute('scale', scale.toFixed(3));
+
+                    // Occasionally reseed while active (keeps it organic)
+                    if (s.amp > 0.2 && Math.random() < 0.02) {
+                        const newSeed = (Math.random() * 1000) | 0;
+                        if (newSeed !== s.lastSeed) {
+                            c.turb.setAttribute('seed', String(newSeed));
+                            s.lastSeed = newSeed;
+                        }
+                    }
+
+                    // If fully idle, reset to clean defaults
+                    if (s.amp === 0 && s.target === 0) {
+                        c.turb.setAttribute('baseFrequency', `${c.baseX.toFixed(4)} ${c.baseY.toFixed(4)}`);
+                        c.disp.setAttribute('scale', '0');
+                    }
+                }
+
+                const anyActive = state.text.amp > 0 || state.avatar.amp > 0 || state.text.hover > 0 || state.avatar.hover > 0;
+                if (anyActive) state.raf = requestAnimationFrame(tick);
+                else state.raf = 0;
+            }
+        }
+
+
+
+        function initHoudiniEngineeringBG(){
+            // CSS Painting API (Houdini Paint) — progressive enhancement
+            if (!('paintWorklet' in CSS) || !CSS.paintWorklet) return;
+
+            // Keep it crisp on HiDPI without going wild on perf
+            const setDpr = () => {
+                const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+                document.documentElement.style.setProperty('--eng-bg-dpr', String(dpr));
+            };
+            setDpr();
+            window.addEventListener('resize', setDpr, { passive: true });
+
+            const workletCode = `
+                /* Houdini Paint Worklet: engineeringBG */
+                const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+                const num = (props, name, fallback) => {
+                    const v = props && props.get && props.get(name);
+                    const n = parseFloat(v === undefined || v === null ? '' : String(v));
+                    return Number.isFinite(n) ? n : fallback;
+                };
+
+                // Simple deterministic RNG (Mulberry32)
+                const makeRng = (seed) => {
+                    let t = (seed >>> 0) || 1;
+                    return () => {
+                        t += 0x6D2B79F5;
+                        let r = Math.imul(t ^ (t >>> 15), 1 | t);
+                        r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+                        return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+                    };
+                };
+
+                // Hash-like 1D noise (deterministic, cheap)
+                const noise1 = (x, seed) => {
+                    // x: number (we quantize a bit)
+                    let n = ((x * 0.14) | 0) + (seed | 0);
+                    n = Math.imul(n ^ (n >>> 16), 0x45d9f3b);
+                    n = Math.imul(n ^ (n >>> 16), 0x45d9f3b);
+                    n = (n ^ (n >>> 16)) >>> 0;
+                    return (n / 4294967296) * 2 - 1; // [-1..1]
+                };
+
+                class EngineeringBG {
+                    static get inputProperties() {
+                        return [
+                            '--eng-bg-grid',
+                            '--eng-bg-major',
+                            '--eng-bg-hatch',
+                            '--eng-bg-seed',
+                            '--eng-bg-dpr',
+                            '--eng-bg-phase',
+                            '--eng-bg-grid-alpha',
+                            '--eng-bg-major-alpha',
+                            '--eng-bg-hatch-alpha',
+                            '--eng-bg-noise-alpha',
+                            '--eng-bg-scope-alpha',
+                            '--eng-bg-scope-thickness',
+                            '--eng-bg-cal-alpha',
+                        ];
+                    }
+
+                    paint(ctx, geom, props) {
+                        const w = Math.max(1, geom.width);
+                        const h = Math.max(1, geom.height);
+
+                        const dpr   = clamp(num(props, '--eng-bg-dpr', 1), 1, 2);
+                        const W     = w / dpr;
+                        const H     = h / dpr;
+
+                        const grid  = clamp(num(props, '--eng-bg-grid', 28), 12, 84);
+                        const major = clamp(num(props, '--eng-bg-major', grid * 4), grid * 2, grid * 14);
+                        const hatch = clamp(num(props, '--eng-bg-hatch', 160), 70, 340);
+
+                        const seed  = (num(props, '--eng-bg-seed', 1337) | 0) >>> 0;
+                        const phase = num(props, '--eng-bg-phase', 0);
+
+                        const aGrid  = clamp(num(props, '--eng-bg-grid-alpha', 0.055), 0, 0.25);
+                        const aMajor = clamp(num(props, '--eng-bg-major-alpha', 0.080), 0, 0.35);
+                        const aHatch = clamp(num(props, '--eng-bg-hatch-alpha', 0.035), 0, 0.25);
+                        const aNoise = clamp(num(props, '--eng-bg-noise-alpha', 0.028), 0, 0.20);
+                        const aScope = clamp(num(props, '--eng-bg-scope-alpha', 0.055), 0, 0.30);
+                        const scopeW = clamp(num(props, '--eng-bg-scope-thickness', 1.15), 0.6, 2.2);
+                        const aCal   = clamp(num(props, '--eng-bg-cal-alpha', 0.050), 0, 0.22);
+
+                        ctx.save();
+                        ctx.scale(dpr, dpr);
+
+                        // --- Minor grid ---
+                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = 'rgba(0,0,0,' + aGrid + ')';
+                        ctx.beginPath();
+
+                        // Align to half-pixels for crisper 1px lines
+                        const x0 = (seed % grid);
+                        for (let x = x0; x <= W; x += grid) {
+                            const xx = (x | 0) + 0.5;
+                            ctx.moveTo(xx, 0);
+                            ctx.lineTo(xx, H);
+                        }
+
+                        const y0 = ((seed * 3) % grid);
+                        for (let y = y0; y <= H; y += grid) {
+                            const yy = (y | 0) + 0.5;
+                            ctx.moveTo(0, yy);
+                            ctx.lineTo(W, yy);
+                        }
+                        ctx.stroke();
+
+                        // --- Major grid ---
+                        ctx.strokeStyle = 'rgba(0,0,0,' + aMajor + ')';
+                        ctx.beginPath();
+
+                        const mx0 = (seed % major);
+                        for (let x = mx0; x <= W; x += major) {
+                            const xx = (x | 0) + 0.5;
+                            ctx.moveTo(xx, 0);
+                            ctx.lineTo(xx, H);
+                        }
+
+                        const my0 = ((seed * 5) % major);
+                        for (let y = my0; y <= H; y += major) {
+                            const yy = (y | 0) + 0.5;
+                            ctx.moveTo(0, yy);
+                            ctx.lineTo(W, yy);
+                        }
+                        ctx.stroke();
+
+                        // --- Diagonal hatch (very subtle) ---
+                        if (aHatch > 0) {
+                            ctx.strokeStyle = 'rgba(0,0,0,' + aHatch + ')';
+                            ctx.beginPath();
+
+                            // draw 45° lines over bounding square
+                            const diag = Math.sqrt(W*W + H*H);
+                            const start = -diag;
+                            const end = diag * 2;
+                            for (let t = start; t < end; t += hatch) {
+                                // line: (x,y) = (t,0) -> (t+H, H)
+                                ctx.moveTo(t, -20);
+                                ctx.lineTo(t + H + 20, H + 20);
+                            }
+                            ctx.stroke();
+                        }
+
+                        // --- “PM5544-ish” calibration marks: rings + crosshair ---
+                        if (aCal > 0) {
+                            const cx = W * 0.5;
+                            const cy = H * 0.32;
+                            const baseR = Math.min(W, H) * 0.10;
+
+                            ctx.strokeStyle = 'rgba(0,0,0,' + aCal + ')';
+                            ctx.lineWidth = 1;
+                            ctx.setLineDash([6, 10]);
+
+                            // Concentric rings
+                            for (let i = 0; i < 3; i++) {
+                                const r = baseR * (1 + i * 0.85);
+                                ctx.beginPath();
+                                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                                ctx.stroke();
+                            }
+
+                            ctx.setLineDash([]);
+
+                            // Crosshair
+                            ctx.beginPath();
+                            ctx.moveTo(cx - baseR * 2.1, cy + 0.5);
+                            ctx.lineTo(cx + baseR * 2.1, cy + 0.5);
+                            ctx.moveTo(cx + 0.5, cy - baseR * 2.1);
+                            ctx.lineTo(cx + 0.5, cy + baseR * 2.1);
+                            ctx.stroke();
+
+                            // Corner ticks (small)
+                            const tick = Math.max(10, grid * 0.6);
+                            const inset = Math.max(10, grid * 0.7);
+                            ctx.beginPath();
+                            // top-left
+                            ctx.moveTo(inset, inset + 0.5); ctx.lineTo(inset + tick, inset + 0.5);
+                            ctx.moveTo(inset + 0.5, inset); ctx.lineTo(inset + 0.5, inset + tick);
+                            // top-right
+                            ctx.moveTo(W - inset, inset + 0.5); ctx.lineTo(W - inset - tick, inset + 0.5);
+                            ctx.moveTo(W - inset + 0.5, inset); ctx.lineTo(W - inset + 0.5, inset + tick);
+                            // bottom-left
+                            ctx.moveTo(inset, H - inset + 0.5); ctx.lineTo(inset + tick, H - inset + 0.5);
+                            ctx.moveTo(inset + 0.5, H - inset); ctx.lineTo(inset + 0.5, H - inset - tick);
+                            // bottom-right
+                            ctx.moveTo(W - inset, H - inset + 0.5); ctx.lineTo(W - inset - tick, H - inset + 0.5);
+                            ctx.moveTo(W - inset + 0.5, H - inset); ctx.lineTo(W - inset + 0.5, H - inset - tick);
+                            ctx.stroke();
+                        }
+
+                        // --- Oscilloscope-ish traces (subtle) ---
+                        if (aScope > 0) {
+                            ctx.strokeStyle = 'rgba(0,0,0,' + aScope + ')';
+                            ctx.lineWidth = scopeW;
+                            ctx.lineJoin = 'round';
+                            ctx.lineCap = 'round';
+
+                            const rows = 3;
+                            for (let r = 0; r < rows; r++) {
+                                const yBase = H * (0.54 + r * 0.14);
+                                const freq  = 1.6 + r * 0.35;
+                                const amp   = 3.8 + r * 1.1;
+
+                                ctx.beginPath();
+                                for (let x = 0; x <= W; x += 6) {
+                                    const s = Math.sin((x / W) * Math.PI * 2 * freq + phase * (0.7 + r * 0.2));
+                                    const n = noise1(x + r * 971, seed + r * 1013);
+                                    const y = yBase + s * amp + n * 1.6;
+                                    if (x === 0) ctx.moveTo(0, y);
+                                    else ctx.lineTo(x, y);
+                                }
+                                ctx.stroke();
+                            }
+                        }
+
+                        // --- Subtle noise speckles ---
+                        if (aNoise > 0) {
+                            const rng = makeRng(seed ^ 0x9E3779B9);
+                            const count = Math.min(1800, Math.max(250, ((W * H) / 7000) | 0));
+                            ctx.fillStyle = 'rgba(0,0,0,' + aNoise + ')';
+
+                            for (let i = 0; i < count; i++) {
+                                const x = (rng() * W) | 0;
+                                const y = (rng() * H) | 0;
+                                // Vary dot size slightly
+                                const s = rng() < 0.85 ? 1 : 2;
+                                ctx.fillRect(x, y, s, s);
+                            }
+                        }
+
+                        ctx.restore();
+                    }
+                }
+
+                registerPaint('engineeringBG', EngineeringBG);
+            `;
+
+            try {
+                const blob = new Blob([workletCode], { type: 'application/javascript' });
+                const url = URL.createObjectURL(blob);
+                CSS.paintWorklet.addModule(url).finally(() => {
+                    try { URL.revokeObjectURL(url); } catch (_) {}
+                });
+            } catch (e) {
+                // In case CSP disallows blob: URLs, we just silently skip
+            }
+        }
+
+
 window.addEventListener('load', () => {
+            initHoudiniEngineeringBG();
             initInteractiveTagCloud();
             initHeroMosh();
+            initSvgGlitch();
         });
     </script>
 </body>
