@@ -1,0 +1,125 @@
+:root {
+  --background: #f4f1e8;
+  --surface: #ffffff;
+  --text: #1e1e1e;
+  --muted: #5c5c5c;
+  --accent: #6f4c1e;
+  --border: rgba(30, 30, 30, 0.12);
+  --font-serif: 'Source Serif 4', 'Iowan Old Style', 'Palatino', 'Times New Roman', serif;
+  --font-sans: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-serif);
+  background: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: clamp(220px, 22vw, 280px);
+  padding: 48px 32px;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar h1 {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.sidebar p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: lowercase;
+  margin-top: 24px;
+}
+
+.nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.content {
+  flex: 1;
+  padding: clamp(32px, 6vw, 80px);
+}
+
+.card {
+  max-width: 760px;
+  background: var(--surface);
+  padding: clamp(28px, 4vw, 40px);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card--wide {
+  max-width: 960px;
+}
+
+.card h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4vw, 2.4rem);
+  margin-bottom: 16px;
+}
+
+.card p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.card a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.card a:hover {
+  border-bottom-color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px;
+  }
+}
