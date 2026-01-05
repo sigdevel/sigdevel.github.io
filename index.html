@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Shvedov | Главная</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'">
+    <title>Alexander Shvedov | Main</title>
+    <meta name="description" content="Personal @sigdevel site">
+    <link rel="canonical" href="https://sigdevel_private.github.io/">
+    <meta property="og:title" content="Alexander Shvedov | Main">
+    <meta property="og:description" content="Personal @sigdevel site">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sigdevel_private.github.io/">
+    <meta property="og:image" content="https://sigdevel_private.github.io/assets/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Alexander Shvedov | Main">
+    <meta name="twitter:description" content="Personal @sigdevel site">
+    <meta name="twitter:image" content="https://sigdevel_private.github.io/assets/og-image.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
@@ -13,11 +25,12 @@
     <div class="layout">
         <aside class="sidebar">
             <h1>@sigdevel</h1>
-            <p>offensive research ; and practical security reviews ; development of DAST-tools</p>
+            <p>offensive research / practical security reviews / development of DAST-tools</p>
             <nav class="nav">
                 <a href="/" aria-current="page">home</a>
                 <a href="/cv/">cv</a>
                 <a href="/reviews/">reviews</a>
+                <a href="/tools/">tools</a>
             </nav>
         </aside>
         <main class="content">
@@ -26,6 +39,15 @@
                 <p>
                     This is the zerro-page of the personal site. It contains key links that are important to me: 
 					cv & reviews on bugs, as well as other links to interesting resources related to secure development and dynamic testing.
+                </p>
+            </section>
+            <section class="card">
+                <h2>Tools</h2>
+                <p>
+                    ELF Assistant: in-browser analyzer of ELF protections (NX, canary, PIE, RELRO) with a short attack/hardening checklist.
+                </p>
+                <p>
+                    <a href="/tools/run.html">Open ELF Assistant</a>
                 </p>
             </section>
         </main>

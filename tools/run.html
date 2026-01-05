@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Fast Security ELF parser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'self'">
+  <meta name="description" content="Веб-инструмент для анализа защит ELF (NX, Canary, PIE, RELRO) с черновым планом атаки и усиления защиты. Обработка выполняется локально в браузере.">
+  <link rel="canonical" href="https://sigdevel_private.github.io/tools/run.html">
+  <meta property="og:title" content="Fast Security ELF parser">
+  <meta property="og:description" content="Веб-инструмент для анализа защит ELF (NX, Canary, PIE, RELRO) с черновым планом атаки и усиления защиты. Обработка выполняется локально в браузере.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sigdevel_private.github.io/tools/run.html">
+  <meta property="og:image" content="https://sigdevel_private.github.io/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fast Security ELF parser">
+  <meta name="twitter:description" content="Веб-инструмент для анализа защит ELF (NX, Canary, PIE, RELRO) с черновым планом атаки и усиления защиты. Обработка выполняется локально в браузере.">
+  <meta name="twitter:image" content="https://sigdevel_private.github.io/assets/og-image.svg">
+
+  
+  <link rel="stylesheet" href="/assets/tools.css">
+</head>
+<body>
+  <h1 id="titleText">Fast Security ELF parser (Kaitai)</h1>
+  <p id="introText">Download the ELF file to view canary, NX, PIE, RELRO and get a rough plan of attack/defense enhancement. The file is only processed in the browser.</p>
+
+  <div class="controls">
+    <label for="fileInput" id="fileLabel"></label>
+    <input type="file" id="fileInput" accept="*/*">
+    <button id="analyzeBtn">Analyse</button>
+    <div class="lang-switch">
+      <button id="btnRU" class="lang-switch__button" type="button" title="Русский" aria-pressed="false">RU</button>
+      <button id="btnEN" class="lang-switch__button" type="button" title="English" aria-pressed="false">EN</button>
+    </div>
+  </div>
+  <div id="fileInfo"></div>
+
+  <div id="results" role="status" aria-live="polite">
+    <div id="summary" class="result"></div>
+    <div id="details" class="result"></div>
+  </div>
+
+  <div id="footerNote">Для парсинга используется Kaitai Struct ELF JS-библиотека (Elf.js + KaitaiStream.js).</div>
+
+  <script src="KaitaiStream.js"></script>
+  <script src="Elf.js"></script>
+
+<script>
+// ===== Константы для анализа =====
+const PT_GNU_STACK = 0x6474e551;
+const PT_GNU_RELRO = 0x6474e552;
+const DT_BIND_NOW = 24;
+const DT_FLAGS_1  = 0x6ffffffb;
+const DF_1_NOW    = 0x1;
+const MAX_SIZE = 50 * 1024 * 1024; // 50 МБ
+
+// ===== I18N =====
+const I18N = {
+  ru: {
+    title: "Fast Security ELF parser (Kaitai)",
+    intro: "Загрузи ELF-файл, чтобы посмотреть canary, NX, PIE, RELRO и получить черновой план атаки/усиления защиты. Файл обрабатывается только в браузере.",
+    analyze: "Анализировать",
+    fileLabel: "Файл для анализа / File for analysis",
+    fileLine: (name, size) => `Файл: ${name} (${size} байт)`,
+    headers: { summary: "Итог", protections: "Защиты", hints: "Комментарии", plan: "Что делать атакующему" },
+    riskSummary: "Черновая оценка риска эксплуатации по наборам защит.",
+    labels: {
+      risk: "Уровень риска",
+      meta: (elfClass, elfType) => `Тип ELF: ${elfClass}, e_type: ${elfType}`,
+      footer: "Для парсинга используется Kaitai Struct ELF JS-библиотека (Elf.js + KaitaiStream.js)."
+    },
+    risk: { low: "Низкий", medium: "Средний", high: "Высокий" },
+    errors: {
+      notSelected: "Файл не выбран.",
+      tooBig: "Файл превышает лимит для анализа в браузере (не более 50 МБ).",
+      notElf: "Файл не похож на ELF (подпись 0x7f 'ELF' не найдена).",
+      unknownClass: "Не удалось распознать класс ELF (ожидались ELF32 или ELF64).",
+      parseError: "Ошибка при разборе файла (возможно, повреждённый или нестандартный ELF)."
+    },
+    plan: {
+      noCanary: "Нет stack canary: возможен классический stack overflow с ROP.",
+      hasCanary: "Stack canary включён: потребуется инфо-утечка/другой примитив обхода.",
+      nxOff: "NX отключён: можно исполнять shellcode в стеке/heap.",
+      nxOn: "NX включён: ориентироваться на ret2libc/ROP.",
+      pieOff: "PIE отключён: база кода фиксирована, ROP-цепочки стабильны.",
+      pieOn: "PIE включён: нужна инфо-утечка или другие обходы ASLR.",
+      relroNone: "RELRO нет: потенциальен GOT-overwrite.",
+      relroPartial: "Partial RELRO: часть GOT защищена, проверьте динамические записи.",
+      relroFull: "Full RELRO: ищите иные примитивы (heap, vtable, function pointers).",
+      comboNoCanaryNxPie: "Нет canary, но NX+PIE: stack-overflow + ROP с утечкой адресов.",
+      comboNoCanaryNoNx: "Нет canary и NX: классический BOF с shellcode либо ROP.",
+      fullEnabled: "Все защиты включены: ищите сложные уязвимости (UAF, heap, типы указателей)."
+    },
+    hints: {
+      noCanary: "Нет stack canary: облегчается эксплуатация stack-overflow с ROP.",
+      hasCanary: "Stack canary включён: BOF заметно сложнее.",
+      nxOff: "NX отключён: возможен shellcode.",
+      nxOn: "NX включён: используйте ret2libc/ROP.",
+      pieOff: "PIE отключён: адреса кода фиксированы.",
+      pieOn: "PIE включён: ASLR усложняет ROP, возможны утечки.",
+      relroNone: "RELRO нет: возможен GOT overwrite.",
+      relroPartial: "Partial RELRO: защита частичная.",
+      relroFull: "Full RELRO: GOT защищён."
+    }
+  },
+  en: {
+    title: "Virtual AppSec Architect for ELF (Kaitai)",
+    intro: "Upload an ELF to inspect canary, NX, PIE, RELRO and get a draft attack/hardening plan. Processing happens entirely in your browser.",
+    analyze: "Analyze",
+    fileLabel: "File for analysis / Файл для анализа",
+    fileLine: (name, size) => `File: ${name} (${size} bytes)`,
+    headers: { summary: "Summary", protections: "Protections", hints: "Notes", plan: "Attacker Playbook" },
+    riskSummary: "Draft exploitation risk based on enabled protections.",
+    labels: {
+      risk: "Risk Level",
+      meta: (elfClass, elfType) => `ELF Type: ${elfClass}, e_type: ${elfType}`,
+      footer: "Parsing uses Kaitai Struct ELF JS library (Elf.js + KaitaiStream.js)."
+    },
+    risk: { low: "Low", medium: "Medium", high: "High" },
+    errors: {
+      notSelected: "No file selected.",
+      tooBig: "File exceeds in-browser analysis limit (max 50 MB).",
+      notElf: "File doesn’t look like ELF (0x7f 'ELF' signature not found).",
+      unknownClass: "Couldn’t detect ELF class (expected ELF32 or ELF64).",
+      parseError: "Failed to parse file (possibly corrupted or non-standard ELF)."
+    },
+    plan: {
+      noCanary: "No stack canary: classic stack overflow with ROP is viable.",
+      hasCanary: "Stack canary enabled: need info-leak/other bypass primitive.",
+      nxOff: "NX disabled: shellcode execution in stack/heap is possible.",
+      nxOn: "NX enabled: pivot to ret2libc/ROP.",
+      pieOff: "PIE disabled: code base address is fixed; ROP chains are stable.",
+      pieOn: "PIE enabled: info-leak or other ASLR bypass is required.",
+      relroNone: "No RELRO: GOT overwrite possible.",
+      relroPartial: "Partial RELRO: some GOT entries protected; review dynamic entries.",
+      relroFull: "Full RELRO: look for other primitives (heap, vtable, function pointers).",
+      comboNoCanaryNxPie: "No canary, but NX+PIE: stack overflow + ROP with address leak.",
+      comboNoCanaryNoNx: "No canary and NX: classic BOF with shellcode or ROP.",
+      fullEnabled: "All protections on: hunt for complex bugs (UAF, heap, type confusions)."
+    },
+    hints: {
+      noCanary: "No stack canary: stack-overflow exploitation with ROP is easier.",
+      hasCanary: "Stack canary enabled: BOF much harder.",
+      nxOff: "NX disabled: shellcode possible.",
+      nxOn: "NX enabled: use ret2libc/ROP.",
+      pieOff: "PIE disabled: code addresses are fixed.",
+      pieOn: "PIE enabled: ASLR complicates ROP; info leaks help.",
+      relroNone: "No RELRO: GOT overwrite possible.",
+      relroPartial: "Partial RELRO: partial protection.",
+      relroFull: "Full RELRO: GOT protected."
+    }
+  }
+};
+
+let currentLang = (navigator.language || '').toLowerCase().startsWith('ru') ? 'ru' : 'en';
+let lastState = null; // {analysis, protections, elfClass, elfType, fileName, fileSize}
+
+function tr(path) {
+  const segs = path.split('.');
+  let obj = I18N[currentLang];
+  for (const s of segs) obj = obj && obj[s];
+  return obj;
+}
+
+function applyLang() {
+  document.title = tr('title');
+  document.getElementById('titleText').textContent = tr('title');
+  document.getElementById('introText').textContent = tr('intro');
+  document.getElementById('analyzeBtn').textContent = tr('analyze');
+  document.getElementById('fileLabel').textContent = tr('fileLabel');
+  const footer = document.getElementById('footerNote');
+  if (footer) footer.textContent = tr('labels.footer');
+  // Toggle buttons visual state
+  const ru = document.getElementById('btnRU'), en = document.getElementById('btnEN');
+  ru.style.borderColor = currentLang === 'ru' ? 'var(--accent)' : 'var(--card-border)';
+  en.style.borderColor = currentLang === 'en' ? 'var(--accent)' : 'var(--card-border)';
+  ru.style.color = currentLang === 'ru' ? 'var(--accent)' : 'var(--fg)';
+  en.style.color = currentLang === 'en' ? 'var(--accent)' : 'var(--fg)';
+  ru.setAttribute('aria-pressed', currentLang === 'ru' ? 'true' : 'false');
+  en.setAttribute('aria-pressed', currentLang === 'en' ? 'true' : 'false');
+  // Re-render if we have results
+  if (lastState) {
+    const { protections, elfClass, elfType, fileName, fileSize } = lastState;
+    const analysis = analyzeRisk(protections); // regenerate text in selected language
+    lastState.analysis = analysis;
+    document.getElementById('fileInfo').textContent = tr('fileLine')(fileName, fileSize);
+    renderSummary(document.getElementById('summary'), analysis, elfClass, elfType);
+    renderDetails(document.getElementById('details'), protections, analysis);
+  }
+}
+
+// ===== Адаптер для Kaitai ELF =====
+class ElfAdapter {
+  constructor(arrayBuffer) {
+    const ks = new KaitaiStream(arrayBuffer);
+    this.elf = new Elf(ks);
+  }
+
+  isElf() {
+    const m = this.elf.magic;
+    return m[0] === 0x7f && m[1] === 0x45 && m[2] === 0x4c && m[3] === 0x46;
+  }
+
+  getElfClass() {
+    const c = this.elf.bits;
+    if (c === Elf.Bits.B32) return "ELF32";
+    if (c === Elf.Bits.B64) return "ELF64";
+    return "UNKNOWN";
+  }
+
+  getElfType() {
+    const t = this.elf.header.eType;
+    if (t === Elf.ObjType.EXECUTABLE) return "EXEC";
+    if (t === Elf.ObjType.SHARED)     return "SHARED"; // ET_DYN
+    return "OTHER";
+  }
+
+  getProgramHeaders() {
+    return this.elf.header.programHeaders.map(ph => ({ type: ph.type, flagsObj: ph.flagsObj }));
+  }
+
+  // Символы из .dynsym и .symtab
+  getSymbols() {
+    const syms = [];
+    const shdrs = this.elf.header.sectionHeaders;
+    for (const sh of shdrs) {
+      if (sh.type === Elf.ShType.DYNSYM || sh.type === Elf.ShType.SYMTAB) {
+        const table = sh.body.entries;
+        for (const s of table) syms.push({ name: s.name, value: s.value });
+      }
+    }
+    return syms;
+  }
+
+  // .dynamic для RELRO (DT_BIND_NOW, DT_FLAGS_1)
+  getDynamicEntries() {
+    const entries = [];
+    // 1) Через секции
+    try {
+      for (const sh of this.elf.header.sectionHeaders) {
+        if (sh.type === Elf.ShType.DYNAMIC && sh.body && sh.body.entries) {
+          for (const d of sh.body.entries) entries.push({ tag: d.tagEnum, val: d.valueOrPtr, flag1: d.flag1Values });
+        }
+      }
+    } catch (_) {}
+    // 2) Фоллбэк: через program headers
+    if (entries.length === 0) {
+      try {
+        for (const ph of this.elf.header.programHeaders) {
+          if (ph.type === Elf.PhType.DYNAMIC && ph.body && ph.body.entries) {
+            for (const d of ph.body.entries) entries.push({ tag: d.tagEnum, val: d.valueOrPtr, flag1: d.flag1Values });
+          }
+        }
+      } catch (_) {}
+    }
+    return entries;
+  }
+}
+
+// ===== Проверки защит =====
+function hasNX(adapter) {
+  const phdrs = adapter.getProgramHeaders();
+  for (const ph of phdrs) {
+    if (ph.type === Elf.PhType.GNU_STACK || ph.type === PT_GNU_STACK) {
+      const exec = ph.flagsObj ? ph.flagsObj.execute : false;
+      return !exec;
+    }
+  }
+  return true;
+}
+
+function hasStackCanary(adapter) {
+  const symbols = adapter.getSymbols();
+  return symbols.some(sym => {
+    const name = sym.name || "";
+    return name === "__stack_chk_fail" || name === "__intel_security_cookie";
+  });
+}
+
+function getRelroMode(adapter) {
+  const phdrs = adapter.getProgramHeaders();
+  let hasRelroSegment = false;
+  for (const ph of phdrs) {
+    if (ph.type === Elf.PhType.GNU_RELRO || ph.type === PT_GNU_RELRO) { hasRelroSegment = true; break; }
+  }
+  if (!hasRelroSegment) return "none";
+
+  const dynamicEntries = adapter.getDynamicEntries();
+  let bindNow = false;
+  for (const d of dynamicEntries) {
+    if (d.tag === DT_BIND_NOW) { bindNow = true; break; }
+    if (d.tag === DT_FLAGS_1 && (d.val & DF_1_NOW)) { bindNow = true; break; }
+    if (d.tag === DT_FLAGS_1 && d.flag1 && d.flag1.now) { bindNow = true; break; }
+  }
+  return bindNow ? "full" : "partial";
+}
+
+function isPie(adapter) {
+  const t = adapter.elf.header.eType;
+  if (t === Elf.ObjType.EXECUTABLE) return false;
+  if (t === Elf.ObjType.SHARED) {
+    // PIE: ET_DYN + PT_INTERP → исполняемый ET_DYN
+    try { return adapter.elf.header.programHeaders.some(ph => ph.type === Elf.PhType.INTERP); } catch (_) { return false; }
+  }
+  return false;
+}
+
+// ===== Аналитика и вывод =====
+function buildAttackPlan(p) {
+  const plan = [];
+  if (!p.stackCanary) plan.push(tr('plan.noCanary')); else plan.push(tr('plan.hasCanary'));
+  if (!p.nx) plan.push(tr('plan.nxOff')); else plan.push(tr('plan.nxOn'));
+  if (!p.pie) plan.push(tr('plan.pieOff')); else plan.push(tr('plan.pieOn'));
+  if (p.relro === 'none') plan.push(tr('plan.relroNone')); else if (p.relro === 'partial') plan.push(tr('plan.relroPartial')); else plan.push(tr('plan.relroFull'));
+  if (!p.stackCanary && p.nx && p.pie) plan.push(tr('plan.comboNoCanaryNxPie'));
+  if (!p.stackCanary && !p.nx) plan.push(tr('plan.comboNoCanaryNoNx'));
+  if (p.stackCanary && p.nx && p.pie && p.relro === 'full') plan.push(tr('plan.fullEnabled'));
+  return plan;
+}
+
+function analyzeRisk(p) {
+  const hints = [];
+  let score = 0;
+
+  if (!p.stackCanary) { score += 3; hints.push(tr('hints.noCanary')); } else hints.push(tr('hints.hasCanary'));
+  if (!p.nx) { score += 3; hints.push(tr('hints.nxOff')); } else hints.push(tr('hints.nxOn'));
+  if (!p.pie) { score += 2; hints.push(tr('hints.pieOff')); } else hints.push(tr('hints.pieOn'));
+  if (p.relro === 'none') { score += 2; hints.push(tr('hints.relroNone')); }
+  else if (p.relro === 'partial') { score += 1; hints.push(tr('hints.relroPartial')); }
+  else hints.push(tr('hints.relroFull'));
+
+  let level = tr('risk.low'); let levelClass = 'low';
+  if (score >= 6) { level = tr('risk.high'); levelClass = 'high'; }
+  else if (score >= 3) { level = tr('risk.medium'); levelClass = 'medium'; }
+
+  const attackPlan = buildAttackPlan(p);
+  return { level, levelClass, summary: tr('riskSummary'), hints, attackPlan };
+}
+
+// ===== Рендер =====
+function clearNode(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+
+function renderSummary(container, analysis, elfClass, elfType) {
+  clearNode(container);
+  const h2 = document.createElement("h2"); h2.textContent = tr('headers.summary'); container.appendChild(h2);
+  const pMeta = document.createElement("p"); pMeta.textContent = tr('labels.meta')(elfClass, elfType); container.appendChild(pMeta);
+  const pLevel = document.createElement("p"); pLevel.className = analysis.levelClass; pLevel.textContent = `${tr('labels.risk')}: ${analysis.level}`; container.appendChild(pLevel);
+  const pSummary = document.createElement("p"); pSummary.textContent = analysis.summary; container.appendChild(pSummary);
+}
+
+function renderDetails(container, protections, analysis) {
+  clearNode(container);
+  const h3Prot = document.createElement("h3"); h3Prot.textContent = tr('headers.protections'); container.appendChild(h3Prot);
+  const pre = document.createElement("pre"); pre.textContent = JSON.stringify(protections, null, 2); container.appendChild(pre);
+  const h3Hints = document.createElement("h3"); h3Hints.textContent = tr('headers.hints'); container.appendChild(h3Hints);
+  const ul = document.createElement("ul"); analysis.hints.forEach(h => { const li = document.createElement("li"); li.textContent = h; ul.appendChild(li); }); container.appendChild(ul);
+  const h3Plan = document.createElement("h3"); h3Plan.textContent = tr('headers.plan'); container.appendChild(h3Plan);
+  const ol = document.createElement("ol"); analysis.attackPlan.forEach(step => { const li = document.createElement("li"); li.textContent = step; ol.appendChild(li); }); container.appendChild(ol);
+}
+
+// ===== UI =====
+document.getElementById('analyzeBtn').onclick = async () => {
+  const fileInput = document.getElementById('fileInput');
+  const file = fileInput.files[0];
+  const summary = document.getElementById('summary');
+  const details = document.getElementById('details');
+  const fileInfo = document.getElementById('fileInfo');
+
+  clearNode(summary); clearNode(details);
+
+  if (!file) { const p = document.createElement('p'); p.className = 'high'; p.textContent = tr('errors.notSelected'); summary.appendChild(p); fileInfo.textContent=''; return; }
+  if (file.size > MAX_SIZE) { const p = document.createElement('p'); p.className='high'; p.textContent=tr('errors.tooBig'); summary.appendChild(p); fileInfo.textContent=''; return; }
+
+  fileInfo.textContent = tr('fileLine')(file.name, file.size);
+
+  try {
+    const buf = await file.arrayBuffer();
+    const elf = new ElfAdapter(buf);
+    if (!elf.isElf()) { const p = document.createElement('p'); p.className='high'; p.textContent=tr('errors.notElf'); summary.appendChild(p); return; }
+
+    const elfClass = elf.getElfClass();
+    if (elfClass === 'UNKNOWN') { const p = document.createElement('p'); p.className='high'; p.textContent=tr('errors.unknownClass'); summary.appendChild(p); return; }
+
+    const protections = {
+      stackCanary: hasStackCanary(elf),
+      nx: hasNX(elf),
+      pie: isPie(elf),
+      relro: getRelroMode(elf)
+    };
+    const analysis = analyzeRisk(protections);
+    renderSummary(summary, analysis, elfClass, elf.getElfType());
+    renderDetails(details, protections, analysis);
+    lastState = { analysis, protections, elfClass, elfType: elf.getElfType(), fileName: file.name, fileSize: file.size };
+  } catch (e) {
+    const p = document.createElement('p'); p.className='high'; p.textContent=tr('errors.parseError'); summary.appendChild(p);
+    console.error(e);
+  }
+};
+
+// Фоллбэк тёмной темы, если media-query не срабатывает
+try { const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.classList.toggle('theme-dark', prefersDark); } catch (_) {}
+
+// Wire language toggles
+document.getElementById('btnRU').addEventListener('click', () => { currentLang='ru'; applyLang(); });
+document.getElementById('btnEN').addEventListener('click', () => { currentLang='en'; applyLang(); });
+applyLang();
+</script>
+</body>
+</html>
