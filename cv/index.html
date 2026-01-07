@@ -67,11 +67,17 @@
         <button class="language-btn" data-lang="ru">RU</button>
     </div>
 
+    <header class="mobile-header">
+        <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" data-menu-toggle>Меню</button>
+        <span class="mobile-title">@sigdevel</span>
+    </header>
+    <div class="menu-overlay" data-menu-overlay></div>
+
     <div class="layout">
         <aside class="sidebar">
             <h1>@sigdevel</h1>
             <p>Practical case study</p>
-            <nav class="nav">
+            <nav class="nav" id="site-nav">
                 <a href="/">home</a>
                 <a href="/cv/" aria-current="page">cv</a>
                 <a href="/reviews/">reviews</a>
@@ -237,6 +243,7 @@
         </main>
     </div>
 
+    <script src="/assets/site.js" defer></script>
     <script>
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
