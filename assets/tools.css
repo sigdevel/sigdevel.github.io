@@ -10,6 +10,19 @@ color-scheme: light dark;
 --input-bg: #ffffff;
 --input-fg: #111111;
 --input-border: #d0d7de;
+--eng-bg-grid: 28;
+--eng-bg-major: 112;
+--eng-bg-hatch: 160;
+--eng-bg-seed: 1337;
+--eng-bg-dpr: 1;
+--eng-bg-phase: 0;
+--eng-bg-grid-alpha: 0.055;
+--eng-bg-major-alpha: 0.080;
+--eng-bg-hatch-alpha: 0.035;
+--eng-bg-noise-alpha: 0.028;
+--eng-bg-scope-alpha: 0.055;
+--eng-bg-scope-thickness: 1.15;
+--eng-bg-cal-alpha: 0.050;
 }
 @media (prefers-color-scheme: dark) {
 :root {
@@ -72,3 +85,40 @@ pre { background: var(--pre-bg); padding: 8px; overflow-x: auto; font-size: 0.7r
 ul, ol { margin: 0 0 4px 18px; padding: 0; }
 li { font-size: 0.8rem; margin-bottom: 3px; }
 #footerNote { margin-top: 12px; font-size: 0.7rem; color: var(--muted); }
+
+@supports (background-image: paint(engineeringBG)) {
+  body {
+    background-image: paint(engineeringBG);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  @property --eng-bg-phase {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body {
+      animation: engBgPhase 14s linear infinite;
+    }
+  }
+
+  @keyframes engBgPhase {
+    from { --eng-bg-phase: 0; }
+    to { --eng-bg-phase: 6.28318; }
+  }
+}
+
+@supports not (background-image: paint(engineeringBG)) {
+  body {
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.030) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.030) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.020) 0 1px, transparent 1px 160px),
+      radial-gradient(circle at 50% 32%, rgba(0, 0, 0, 0.055), transparent 60%);
+    background-attachment: fixed;
+  }
+}
