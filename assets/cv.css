@@ -551,6 +551,67 @@ font-size: 1.2rem;
 margin-top: 3px;
 }
 
+.contributions-details {
+margin-top: 24px;
+border: 1px solid rgba(0, 0, 0, 0.1);
+border-radius: 12px;
+background: rgba(255, 255, 255, 0.9);
+padding: 12px 18px;
+box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+font-family: var(--font-sans);
+}
+
+.contributions-details summary {
+cursor: pointer;
+list-style: none;
+font-weight: 700;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.contributions-details summary::-webkit-details-marker {
+display: none;
+}
+
+.contributions-details summary::before {
+content: "+";
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 22px;
+height: 22px;
+border-radius: 6px;
+background: rgba(111, 76, 30, 0.12);
+color: var(--accent);
+font-weight: 700;
+}
+
+.contributions-details[open] summary::before {
+content: "–";
+}
+
+.contributions-details .details-body {
+margin-top: 12px;
+color: var(--muted);
+}
+
+.contributions-details ul {
+margin: 10px 0 16px;
+padding-left: 20px;
+display: grid;
+gap: 8px;
+}
+
+.contributions-details a {
+color: var(--accent);
+text-decoration: none;
+}
+
+.contributions-details a:hover {
+text-decoration: underline;
+}
+
 .tag-cloud {
 display: flex;
 flex-wrap: wrap;
