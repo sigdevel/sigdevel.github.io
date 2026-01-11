@@ -3,10 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Short-list по уязвимостям GPAC/MP4Box (2025)</title>
-  <meta name="description" content="Обзор уязвимостей GPAC/MP4Box по результатам выгрузки БДУ ФСТЭК на 2025 год" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://sigdevel.github.io/reviews/gpac-bdu-2025.html" />
+  <title>GPAC/MP4Box : уязвимости из БДУ ФСТЭК (2025): таблица (CWE, функции, версии, DoS/RCE)</title>
+  <meta name="description" content="Ранжированный short-list уязвимостей GPAC/MP4Box по выгрузке БДУ ФСТЭК (2025): BDU ID, CWE, функции, затронутые версии, статус устранения. Фильтры: DoS+RCE и «удалённо»." />
   <style>
     :root {
       --bg: #0b0d10;
@@ -249,14 +247,94 @@
       .stat { grid-column: span 12; }
       header { padding-top: 30px; }
     }
+  
+    table caption {
+      caption-side: top;
+      padding: 10px 10px 0;
+      text-align: left;
+      color: var(--muted);
+      font-size: 13px;
+    }
   </style>
+
+
+  <!-- Social preview / Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="sigdevel : reviews" />
+  <meta property="og:title" content="GPAC/MP4Box : уязвимости из БДУ ФСТЭК (2025): таблица (CWE, функции, версии, DoS/RCE)" />
+  <meta property="og:description" content="Ранжированный short-list уязвимостей GPAC/MP4Box по выгрузке БДУ ФСТЭК (2025): BDU ID, CWE, функции, затронутые версии, статус устранения. Фильтры: DoS+RCE и «удалённо»." />
+  <meta property="og:url" content="https://sigdevel.github.io/reviews/gpac-bdu-2025.html" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:image" content="https://sigdevel.github.io/assets/og/gpac-bdu-2025.png" />
+  <meta property="og:image:alt" content="GPAC/MP4Box : уязвимости БДУ ФСТЭК (2025)" />
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GPAC/MP4Box : уязвимости из БДУ ФСТЭК (2025): таблица (CWE, функции, версии, DoS/RCE)" />
+  <meta name="twitter:description" content="Ранжированный short-list уязвимостей GPAC/MP4Box по выгрузке БДУ ФСТЭК (2025): BDU ID, CWE, функции, затронутые версии, статус устранения. Фильтры: DoS+RCE и «удалённо»." />
+  <meta name="twitter:image" content="https://sigdevel.github.io/assets/og/gpac-bdu-2025.png" />
+  <meta name="twitter:creator" content="@sigdevel" />
+
+  <!-- Extra -->
+  <meta name="author" content="sigdevel" />
+  <meta name="theme-color" content="#0b0d10" />
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- Structured data (JSON-LD) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "GPAC/MP4Box : уязвимости из БДУ ФСТЭК (2025): таблица (CWE, функции, версии, DoS/RCE)",
+  "description": "Ранжированный short-list уязвимостей GPAC/MP4Box по выгрузке БДУ ФСТЭК (2025): BDU ID, CWE, функции, затронутые версии, статус устранения. Фильтры: DoS+RCE и «удалённо».",
+  "inLanguage": "ru",
+  "url": "https://sigdevel.github.io/reviews/gpac-bdu-2025.html",
+  "datePublished": "2026-01-11",
+  "dateModified": "2026-01-11",
+  "author": {
+    "@type": "Person",
+    "name": "sigdevel"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "sigdevel"
+  },
+  "keywords": [
+    "GPAC",
+    "MP4Box",
+    "БДУ",
+    "ФСТЭК",
+    "CWE",
+    "уязвимости",
+    "DoS",
+    "RCE"
+  ]
+}
+  </script>
+
 </head>
 <body>
 
-  <main>
+<header>
+  <a class="back" href="./">← reviews</a>
+  <h1>GPAC/MP4Box : уязвимости из БДУ ФСТЭК (2025)</h1>
+  <p class="lede">
+    Краткий обзор (short-list) уязвимостей <b>GPAC/MP4Box</b> по результатам выгрузки <b>БДУ ФСТЭК</b> за 2025 год.
+    В таблице: <b>BDU ID</b>, <b>CWE</b>, функция/модуль, затронутые версии и статус устранения. Доступны фильтры: «DoS+RCE» и «удалённо».
+  </p>
+</header>
 
-    <section>
-      <h2>full list</h2>
+<main>
+
+    
+    <noscript>
+      <section>
+        <h2>Примечание</h2>
+        <p class="muted">Фильтры и поиск по таблице работают через JavaScript. Без JavaScript доступен полный список.</p>
+      </section>
+    </noscript>
+<section>
+      <h2>Полный список уязвимостей</h2>
 
       <div class="controls">
         <input id="q" type="text" placeholder="поиск: BDU, функция, CWE, версия, вендор…" />
@@ -267,7 +345,8 @@
 
       <div class="table-wrap">
         <table id="vulnTable">
-          <thead>
+          <caption class="note">Таблица уязвимостей GPAC/MP4Box из БДУ ФСТЭК (2025)</caption>
+<thead>
             <tr>
               <th>#</th>
               <th>BDU</th>
@@ -320,7 +399,7 @@
       <td class="func"><code>gf_isom_copy_sample_info</code></td>
       <td class="cwe"><code>CWE-122</code></td>
       <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">buffer overflow</span></td>
-      <td class="ver"><span class="truncate" title="— (Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
+      <td class="ver"><span class="truncate" title=": (Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
       <td class="pub">08.12.2025</td>
       <td class="fix">устранена</td>
     </tr>
@@ -355,7 +434,7 @@
       <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">use-after-free</span></td>
       <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
       <td class="pub">18.08.2025</td>
-      <td class="fix">нет данных</td>
+      <td class="fix">устранена</td>
     </tr>
 
     <tr data-impact="rce" data-remote="1">
@@ -377,7 +456,7 @@
       <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">buffer overflow</span></td>
       <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1644-g8e3b5e1dd-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1644-g8e3b5e1dd-master (Gpac)</span></td>
       <td class="pub">04.08.2025</td>
-      <td class="fix">нет данных</td>
+      <td class="fix">устранена</td>
     </tr>
 
     <tr data-impact="rce" data-remote="0">
