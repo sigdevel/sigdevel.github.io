@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GPAC/MP4Box — уязвимости из БДУ ФСТЭК (2025)</title>
+  <meta name="description" content="Ранжирование и обзор уязвимостей GPAC/MP4Box по результатам выгрузки БДУ ФСТЭК (2025)." />
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --fg: #e7eaf0;
+      --muted: #a8b0bf;
+      --card: rgba(255,255,255,0.06);
+      --line: rgba(255,255,255,0.10);
+      --accent: #9ad1ff;
+      --warn: #ffd58a;
+      --danger: #ff9aa5;
+      --ok: #9affc7;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --fg: #111827;
+        --muted: #4b5563;
+        --card: rgba(17,24,39,0.04);
+        --line: rgba(17,24,39,0.10);
+      }
+    }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background: radial-gradient(900px 500px at 30% -10%, rgba(154,209,255,0.25), transparent 55%),
+                  radial-gradient(700px 420px at 90% 0%, rgba(255,154,165,0.18), transparent 55%),
+                  var(--bg);
+      color: var(--fg);
+      line-height: 1.55;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      padding: 48px 20px 18px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .back {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--fg);
+      font-size: 14px;
+    }
+    h1 {
+      margin: 18px 0 8px;
+      font-size: clamp(26px, 4vw, 44px);
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      max-width: 80ch;
+    }
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+    section {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+    ul, ol { margin: 10px 0 0 18px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .stat {
+      grid-column: span 6;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+    }
+    .stat b { font-size: 18px; }
+    .muted { color: var(--muted); }
+    code {
+      font-family: var(--mono);
+      font-size: 0.95em;
+      background: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.10);
+      /* разрешаем перенос внутри code, иначе таблица уезжает по ширине */
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 0 12px;
+    }
+    .controls input[type="text"] {
+      flex: 1 1 340px;
+      min-width: 220px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--fg);
+      outline: none;
+    }
+    .controls label {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      font-size: 14px;
+      color: var(--muted);
+      user-select: none;
+    }
+    .controls button {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--fg);
+      cursor: pointer;
+    }
+    .controls button:hover { filter: brightness(1.08); }
+    .table-wrap {
+      width: 100%;
+      /* без горизонтальной прокрутки: содержимое переносится внутри ячеек */
+      overflow: visible;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      /* фиксированная раскладка: не раздуваем таблицу длинными строками */
+      table-layout: fixed;
+      min-width: 0;
+      font-size: 14px;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      padding: 10px 10px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    tbody td {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 10px 10px;
+      vertical-align: top;
+      /* ключ: переносим даже очень длинные токены без пробелов (rev hashes и т.п.) */
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
+    }
+    tbody tr:hover { background: rgba(255,255,255,0.04); }
+    td.num { width: 56px; color: var(--muted); }
+    td.bdu { width: 150px; }
+    td.func { width: 290px; }
+    td.cwe { width: 120px; }
+    td.pub { width: 110px; color: var(--muted); white-space: nowrap; }
+    td.fix { width: 110px; color: var(--muted); white-space: nowrap; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 12px;
+      margin: 0 6px 6px 0;
+      color: var(--fg);
+      background: rgba(255,255,255,0.06);
+    }
+    .pill-rce { border-color: rgba(255,154,165,0.45); background: rgba(255,154,165,0.14); }
+    .pill-dos { border-color: rgba(255,213,138,0.45); background: rgba(255,213,138,0.12); }
+    .pill-remote { border-color: rgba(154,209,255,0.45); background: rgba(154,209,255,0.12); }
+    .pill-root { border-color: rgba(255,255,255,0.18); }
+    .truncate {
+      /* больше не обрезаем: показываем полное значение */
+      display: inline;
+      max-width: none;
+      overflow: visible;
+      text-overflow: clip;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      vertical-align: bottom;
+      color: var(--muted);
+    }
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .kpi {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .kpi div {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+    .kpi b { color: var(--fg); }
+    footer {
+      max-width: 1400px;
+      margin: 22px auto 60px;
+      padding: 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 680px) {
+      .stat { grid-column: span 12; }
+      header { padding-top: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+
+    <section>
+      <h2>full list</h2>
+
+      <div class="controls">
+        <input id="q" type="text" placeholder="поиск: BDU, функция, CWE, версия, вендор…" />
+        <label><input id="onlyRce" type="checkbox" /> только DoS+RCE</label>
+        <label><input id="onlyRemote" type="checkbox" /> только «удалённо»</label>
+        <button id="reset" type="button">Сброс</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="vulnTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>BDU</th>
+              <th>Функция</th>
+              <th>CWE</th>
+              <th>Теги</th>
+              <th>Затронутые версии</th>
+              <th>Публ.</th>
+              <th>Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+    <tr data-impact="rce" data-remote="1">
+      <td class="num">1</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-13150" target="_blank" rel="noreferrer">BDU:2025-13150</a></td>
+      <td class="func"><code>gf_filter_pid_send_event_downstream</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1665-g3f20eb0cd-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1665-g3f20eb0cd-master (Gpac)</span></td>
+      <td class="pub">20.10.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="1">
+      <td class="num">2</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08612" target="_blank" rel="noreferrer">BDU:2025-08612</a></td>
+      <td class="func"><code>gf_odf_ac4_cfg_clean_list</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
+      <td class="pub">17.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="1">
+      <td class="num">3</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08617" target="_blank" rel="noreferrer">BDU:2025-08617</a></td>
+      <td class="func"><code>gf_odf_ac4_cfg_clean_list</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
+      <td class="pub">17.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="1">
+      <td class="num">4</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-15389" target="_blank" rel="noreferrer">BDU:2025-15389</a></td>
+      <td class="func"><code>gf_isom_copy_sample_info</code></td>
+      <td class="cwe"><code>CWE-122</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">buffer overflow</span></td>
+      <td class="ver"><span class="truncate" title="— (Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
+      <td class="pub">08.12.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="1">
+      <td class="num">5</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10075" target="_blank" rel="noreferrer">BDU:2025-10075</a></td>
+      <td class="func"><code>gf_opus_parse_packet_header</code></td>
+      <td class="cwe"><code>CWE-122</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">buffer overflow</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="1">
+      <td class="num">6</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10084" target="_blank" rel="noreferrer">BDU:2025-10084</a></td>
+      <td class="func"><code>stbl_AddSize</code></td>
+      <td class="cwe"><code>CWE-122</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">buffer overflow</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">7</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-09882" target="_blank" rel="noreferrer">BDU:2025-09882</a></td>
+      <td class="func"><code>gf_filter_pid_inst_swap_delete_task</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
+      <td class="pub">18.08.2025</td>
+      <td class="fix">нет данных</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="1">
+      <td class="num">8</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08615" target="_blank" rel="noreferrer">BDU:2025-08615</a></td>
+      <td class="func"><code>gf_odf_ac4_cfg_alternative_info</code></td>
+      <td class="cwe"><code>CWE-122</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">buffer overflow</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
+      <td class="pub">17.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">9</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-09346" target="_blank" rel="noreferrer">BDU:2025-09346</a></td>
+      <td class="func"><code>m2tsdmx_send_packet</code></td>
+      <td class="cwe"><code>CWE-122</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">buffer overflow</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1644-g8e3b5e1dd-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1644-g8e3b5e1dd-master (Gpac)</span></td>
+      <td class="pub">04.08.2025</td>
+      <td class="fix">нет данных</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">10</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-13149" target="_blank" rel="noreferrer">BDU:2025-13149</a></td>
+      <td class="func"><code>dasher_process</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1665-g3f20eb0cd-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1665-g3f20eb0cd-master (Gpac)</span></td>
+      <td class="pub">20.10.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">11</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10083" target="_blank" rel="noreferrer">BDU:2025-10083</a></td>
+      <td class="func"><code>gf_node_get_tag</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">12</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10089" target="_blank" rel="noreferrer">BDU:2025-10089</a></td>
+      <td class="func"><code>gf_svg_node_del</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">13</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-09883" target="_blank" rel="noreferrer">BDU:2025-09883</a></td>
+      <td class="func"><code>gf_filter_packet_destroy</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1617-g856674b22-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1617-g856674b22-master (Gpac)</span></td>
+      <td class="pub">18.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">14</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08562" target="_blank" rel="noreferrer">BDU:2025-08562</a></td>
+      <td class="func"><code>gf_filter_pid_inst_swap</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)</span></td>
+      <td class="pub">16.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">15</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08566" target="_blank" rel="noreferrer">BDU:2025-08566</a></td>
+      <td class="func"><code>gf_filter_pid_reconfigure_task_discard</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)</span></td>
+      <td class="pub">16.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">16</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10085" target="_blank" rel="noreferrer">BDU:2025-10085</a></td>
+      <td class="func"><code>gf_cenc_set_pssh</code></td>
+      <td class="cwe"><code>CWE-120</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">17</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08564" target="_blank" rel="noreferrer">BDU:2025-08564</a></td>
+      <td class="func"><code>gf_media_import</code></td>
+      <td class="cwe"><code>CWE-122</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">buffer overflow</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)</span></td>
+      <td class="pub">16.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">18</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08567" target="_blank" rel="noreferrer">BDU:2025-08567</a></td>
+      <td class="func"><code>gf_filter_pid_get_packet</code></td>
+      <td class="cwe"><code>CWE-825</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)</span></td>
+      <td class="pub">16.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">19</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08580" target="_blank" rel="noreferrer">BDU:2025-08580</a></td>
+      <td class="func"><code>gf_filter_pid_reconfigure_task_discard</code></td>
+      <td class="cwe"><code>CWE-825</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1557-g62714f27c-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1557-g62714f27c-master (Gpac)</span></td>
+      <td class="pub">16.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">20</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10076" target="_blank" rel="noreferrer">BDU:2025-10076</a></td>
+      <td class="func"><code>mp4_mux_cenc_insert_pssh</code></td>
+      <td class="cwe"><code>CWE-400</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">21</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08051" target="_blank" rel="noreferrer">BDU:2025-08051</a></td>
+      <td class="func"><code>avidmx_process</code></td>
+      <td class="cwe"><code>CWE-369</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">07.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">22</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10080" target="_blank" rel="noreferrer">BDU:2025-10080</a></td>
+      <td class="func"><code>gf_media_map_esd</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">23</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10081" target="_blank" rel="noreferrer">BDU:2025-10081</a></td>
+      <td class="func"><code>gf_media_map_esd</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">24</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08613" target="_blank" rel="noreferrer">BDU:2025-08613</a></td>
+      <td class="func"><code>gf_ac4_parser_bs</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
+      <td class="pub">17.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">25</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08581" target="_blank" rel="noreferrer">BDU:2025-08581</a></td>
+      <td class="func"><code>gf_sei_load_from_state_internal</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1557-g62714f27c-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1557-g62714f27c-master (Gpac)</span></td>
+      <td class="pub">16.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">26</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08045" target="_blank" rel="noreferrer">BDU:2025-08045</a></td>
+      <td class="func"><code>m2tsdmx_update_sdt</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)</span></td>
+      <td class="pub">07.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">27</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08047" target="_blank" rel="noreferrer">BDU:2025-08047</a></td>
+      <td class="func"><code>gf_node_get_field_by_name</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)</span></td>
+      <td class="pub">07.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">28</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08048" target="_blank" rel="noreferrer">BDU:2025-08048</a></td>
+      <td class="func"><code>gf_dash_group_get_audio_channels</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)</span></td>
+      <td class="pub">07.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">29</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08049" target="_blank" rel="noreferrer">BDU:2025-08049</a></td>
+      <td class="func"><code>gf_dash_group_get_audio_channels</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)</span></td>
+      <td class="pub">07.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="rce" data-remote="0">
+      <td class="num">30</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08050" target="_blank" rel="noreferrer">BDU:2025-08050</a></td>
+      <td class="func"><code>gf_scene_ns_connect_object</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-rce">DoS+RCE</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1552-gbb16baf3d-master (Gpac)</span></td>
+      <td class="pub">07.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="1">
+      <td class="num">31</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-03993" target="_blank" rel="noreferrer">BDU:2025-03993</a></td>
+      <td class="func"><code>gf_opus_parse_packet_header</code></td>
+      <td class="cwe"><code>CWE-122</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">buffer overflow</span></td>
+      <td class="ver"><span class="truncate" title="(Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
+      <td class="pub">09.04.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="1">
+      <td class="num">32</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-03990" target="_blank" rel="noreferrer">BDU:2025-03990</a></td>
+      <td class="func"><code>gf_opus_read_length</code></td>
+      <td class="cwe"><code>CWE-121</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">stack overflow</span></td>
+      <td class="ver"><span class="truncate" title="(Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
+      <td class="pub">09.04.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">33</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08563" target="_blank" rel="noreferrer">BDU:2025-08563</a></td>
+      <td class="func"><code>gf_filter_in_parent_chain</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)</span></td>
+      <td class="pub">16.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">34</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08565" target="_blank" rel="noreferrer">BDU:2025-08565</a></td>
+      <td class="func"><code>gf_filter_pid_inst_swap_delete_task</code></td>
+      <td class="cwe"><code>CWE-416</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">use-after-free</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1570-g6208015df-master (Gpac)</span></td>
+      <td class="pub">16.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">35</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10078" target="_blank" rel="noreferrer">BDU:2025-10078</a></td>
+      <td class="func"><code>gf_isom_vp_config_new</code></td>
+      <td class="cwe"><code>CWE-122</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">buffer overflow</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="1">
+      <td class="num">36</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-03992" target="_blank" rel="noreferrer">BDU:2025-03992</a></td>
+      <td class="func"><code>gf_opus_parse_packet_header</code></td>
+      <td class="cwe"><code>CWE-369</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">прочее</span></td>
+      <td class="ver"><span class="truncate" title="(Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
+      <td class="pub">09.04.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">37</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-03139" target="_blank" rel="noreferrer">BDU:2025-03139</a></td>
+      <td class="func"><code>filein_process</code></td>
+      <td class="cwe"><code>CWE-121</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">stack overflow</span></td>
+      <td class="ver"><span class="truncate" title="2.4 (Gpac)">2.4 (Gpac)</span></td>
+      <td class="pub">24.03.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="1">
+      <td class="num">38</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10088" target="_blank" rel="noreferrer">BDU:2025-10088</a></td>
+      <td class="func"><code>gf_isom_get_user_data_count</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-remote">удалённо</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">39</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-09878" target="_blank" rel="noreferrer">BDU:2025-09878</a></td>
+      <td class="func"><code>gf_odf_ac4_cfg_dsi_v1</code></td>
+      <td class="cwe"><code>CWE-125</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">out-of-bounds</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1617-g856674b22-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1617-g856674b22-master (Gpac)</span></td>
+      <td class="pub">18.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">40</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08614" target="_blank" rel="noreferrer">BDU:2025-08614</a></td>
+      <td class="func"><code>gf_ac4_parser_bs</code></td>
+      <td class="cwe"><code>CWE-125</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">out-of-bounds</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
+      <td class="pub">17.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">41</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-05040" target="_blank" rel="noreferrer">BDU:2025-05040</a></td>
+      <td class="func"><code>gf_hevc_read_sps_bs_internal</code></td>
+      <td class="cwe"><code>CWE-125</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">out-of-bounds</span></td>
+      <td class="ver"><span class="truncate" title="(Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
+      <td class="pub">30.04.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">42</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-13148" target="_blank" rel="noreferrer">BDU:2025-13148</a></td>
+      <td class="func"><code>dump_isom_saps</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1672-gc9a31d0e1-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1672-gc9a31d0e1-master (Gpac)</span></td>
+      <td class="pub">20.10.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">43</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-13151" target="_blank" rel="noreferrer">BDU:2025-13151</a></td>
+      <td class="func"><code>gf_isom_get_esd</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1665-g3f20eb0cd-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1665-g3f20eb0cd-master (Gpac)</span></td>
+      <td class="pub">20.10.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">44</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-13152" target="_blank" rel="noreferrer">BDU:2025-13152</a></td>
+      <td class="func"><code>StatSFVec2f</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1678-gb7ffd9f96-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1678-gb7ffd9f96-master (Gpac)</span></td>
+      <td class="pub">20.10.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">45</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10077" target="_blank" rel="noreferrer">BDU:2025-10077</a></td>
+      <td class="func"><code>TrackWriter</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">46</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10079" target="_blank" rel="noreferrer">BDU:2025-10079</a></td>
+      <td class="func"><code>DumpMovieInfo</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">47</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10082" target="_blank" rel="noreferrer">BDU:2025-10082</a></td>
+      <td class="func"><code>Track_SetStreamDescriptor</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">48</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10086" target="_blank" rel="noreferrer">BDU:2025-10086</a></td>
+      <td class="func"><code>gf_parse_lfrac</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">49</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-10087" target="_blank" rel="noreferrer">BDU:2025-10087</a></td>
+      <td class="func"><code>gf_filter_pid_get_packet</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.4 (Gpac)">7.3 (РЕД ОС), 2.4 (Gpac)</span></td>
+      <td class="pub">20.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">50</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-09884" target="_blank" rel="noreferrer">BDU:2025-09884</a></td>
+      <td class="func"><code>gf_ac4_pres_b_4_back_channels_present</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1617-g856674b22-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1617-g856674b22-master (Gpac)</span></td>
+      <td class="pub">18.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">51</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-09886" target="_blank" rel="noreferrer">BDU:2025-09886</a></td>
+      <td class="func"><code>gf_filter_pid_resolve_file_template_ex</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1617-g856674b22-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1617-g856674b22-master (Gpac)</span></td>
+      <td class="pub">18.08.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">52</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08611" target="_blank" rel="noreferrer">BDU:2025-08611</a></td>
+      <td class="func"><code>gf_ac4_presentation_ch_mode</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
+      <td class="pub">17.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">53</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-08616" target="_blank" rel="noreferrer">BDU:2025-08616</a></td>
+      <td class="func"><code>gf_odf_ac4_cfg_dsi_v1</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)">7.3 (РЕД ОС), 2.5-DEV-rev1593-gfe88c3545-master (Gpac)</span></td>
+      <td class="pub">17.07.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">54</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-05039" target="_blank" rel="noreferrer">BDU:2025-05039</a></td>
+      <td class="func"><code>ctts_box_write</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="(Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
+      <td class="pub">30.04.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+
+    <tr data-impact="dos" data-remote="0">
+      <td class="num">55</td>
+      <td class="bdu"><a href="https://bdu.fstec.ru/vul/2025-05041" target="_blank" rel="noreferrer">BDU:2025-05041</a></td>
+      <td class="func"><code>gf_odf_vvc_cfg_write_bs</code></td>
+      <td class="cwe"><code>CWE-476</code></td>
+      <td class="tags"><span class="pill pill-dos">DoS</span> <span class="pill pill-root">null deref</span></td>
+      <td class="ver"><span class="truncate" title="(Debian GNU/Linux), 2.4 (Gpac)">(Debian GNU/Linux), 2.4 (Gpac)</span></td>
+      <td class="pub">30.04.2025</td>
+      <td class="fix">устранена</td>
+    </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+  (function() {
+    const q = document.getElementById('q');
+    const onlyRce = document.getElementById('onlyRce');
+    const onlyRemote = document.getElementById('onlyRemote');
+    const reset = document.getElementById('reset');
+    const rows = Array.from(document.querySelectorAll('#vulnTable tbody tr'));
+
+    function apply() {
+      const needle = (q.value || '').trim().toLowerCase();
+      const wantRce = !!onlyRce.checked;
+      const wantRemote = !!onlyRemote.checked;
+
+      let shown = 0;
+      for (const tr of rows) {
+        const text = tr.innerText.toLowerCase();
+        const impact = tr.getAttribute('data-impact');
+        const remote = tr.getAttribute('data-remote') === '1';
+
+        let ok = true;
+        if (needle && !text.includes(needle)) ok = false;
+        if (wantRce && impact !== 'rce') ok = false;
+        if (wantRemote && !remote) ok = false;
+
+        tr.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      }
+    }
+
+    q.addEventListener('input', apply);
+    onlyRce.addEventListener('change', apply);
+    onlyRemote.addEventListener('change', apply);
+    reset.addEventListener('click', () => {
+      q.value = '';
+      onlyRce.checked = false;
+      onlyRemote.checked = false;
+      apply();
+    });
+
+    apply();
+  })();
+  </script>
+</body>
+</html>
