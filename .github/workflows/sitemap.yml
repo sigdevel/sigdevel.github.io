@@ -25,3 +25,26 @@ jobs:
           git add sitemap.xml
           git commit -m "chore: update sitemap" || exit 0
           git push
+
+  robots_txt_gen:
+    name: robots.txt-gen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate robots.txt
+        run: |
+          cat <<'EOF' > robots.txt
+          User-agent: *
+          Allow: /
+
+          Sitemap: https://sigdevel.github.io/sitemap.xml
+          EOF
+
+      - name: Commit robots.txt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add robots.txt
+          git commit -m "chore: update robots.txt" || exit 0
+          git push
