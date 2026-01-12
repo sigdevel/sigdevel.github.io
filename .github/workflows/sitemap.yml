@@ -18,8 +18,7 @@ jobs:
         with:
           base-url-path: https://sigdevel.github.io
           sitemap-format: xml
-          # по умолчанию html включён; при желании можно включить pdf и др.
-
+          
       - name: Commit sitemap.xml
         run: |
           git config user.name "github-actions[bot]"
