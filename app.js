@@ -299,6 +299,36 @@ const BDU_ENTRIES = [{
   year: 2025,
   project: "JPEG XL",
   severity: "low"
+}, {
+  id: "2026-01737",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-01738",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-01739",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-02409",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-03172",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-03173",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
 }];
 const CVE_ENTRIES = [{
   id: "CVE-2023-0645",
