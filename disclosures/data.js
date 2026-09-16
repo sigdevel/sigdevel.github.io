@@ -1,0 +1,317 @@
+// Vulnerability disclosure data. Keep this file data-only for straightforward updates.
+window.BDU_ENTRIES = [{
+  id: "2022-01054",
+  year: 2022,
+  project: "GPAC",
+  severity: "high"
+}, {
+  id: "2023-00633",
+  year: 2023,
+  project: "GPAC",
+  severity: "high"
+}, {
+  id: "2023-00391",
+  year: 2023,
+  project: "GPAC",
+  severity: "high"
+}, {
+  id: "2023-00622",
+  year: 2023,
+  project: "GPAC",
+  severity: "med"
+}, {
+  id: "2023-00634",
+  year: 2023,
+  project: "GPAC",
+  severity: "med"
+}, {
+  id: "2023-01808",
+  year: 2023,
+  project: "GPAC",
+  severity: "med"
+}, {
+  id: "2025-03992",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-03990",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-03139",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-03993",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-05039",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-05041",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-05040",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08051",
+  year: 2025,
+  project: "GPAC",
+  severity: "med"
+}, {
+  id: "2025-08045",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08047",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08048",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08049",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08050",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08581",
+  year: 2025,
+  project: "GPAC",
+  severity: "med"
+}, {
+  id: "2025-08580",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08566",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08562",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08567",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08563",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08565",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08564",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08613",
+  year: 2025,
+  project: "GPAC",
+  severity: "med"
+}, {
+  id: "2025-08611",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08612",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08614",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08615",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08616",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-08617",
+  year: 2025,
+  project: "GPAC",
+  severity: "low"
+}, {
+  id: "2025-09346",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-09878",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-09882",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-09883",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-09884",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-09885",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-09886",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10075",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10076",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10077",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10078",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10079",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10080",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10081",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10082",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10083",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10084",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10085",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10086",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10087",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10088",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2025-10089",
+  year: 2025,
+  project: "JPEG XL",
+  severity: "low"
+}, {
+  id: "2026-01737",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-01738",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-01739",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-02409",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-03172",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}, {
+  id: "2026-03173",
+  year: 2026,
+  project: "lvext4",
+  severity: "low"
+}];
+window.CVE_ENTRIES = [{
+  id: "CVE-2023-0645",
+  project: "GPAC",
+  year: 2023
+}];

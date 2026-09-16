@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" data-typography="serif-sans" data-density="comfortable" data-palette="cream">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDU / CVE — @sigdevel</title>
+  <meta name="description" content="Публичные раскрытия уязвимостей Александра Шведова в БДУ ФСТЭК и NVD.">
+  <link rel="canonical" href="https://sigdevel.github.io/disclosures/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    @media (max-width: 900px) {
+      .layout { display: block; }
+      .sidebar { position: static; transform: none; width: 100%; height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand"><div class="brand-mark" aria-hidden="true">&gt;_</div><div><h1>@sigdevel</h1><p class="sidebar-sub">offensive research · SDL · DAST</p></div></div>
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="/#home"><span class="nav-dot" aria-hidden="true"></span>главная</a>
+        <a href="/#cv"><span class="nav-dot" aria-hidden="true"></span>cv</a>
+        <a href="/disclosures/" aria-current="page"><span class="nav-dot" aria-hidden="true"></span>BDU / CVE</a>
+        <a href="/#reviews"><span class="nav-dot" aria-hidden="true"></span>обзоры</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="page">
+        <header class="hero hero--narrow"><div class="hero-grid" aria-hidden="true"></div><div class="hero-body">
+          <p class="hero-eyebrow">public security disclosures</p><h1 class="hero-title">BDU / CVE</h1>
+          <p class="hero-lead">Публичные раскрытия через БДУ ФСТЭК и NVD. Данные реестра хранятся отдельно от разметки страницы, чтобы их было проще поддерживать.</p>
+        </div></header>
+        <section class="section" aria-labelledby="registry-title">
+          <div class="section-head"><span class="section-kicker">01</span><h2 id="registry-title">Реестр</h2><span class="section-badge" id="total"></span></div>
+          <div class="bdu-year-strip" id="years"></div>
+          <div class="bdu-controls"><div class="bdu-filters" id="filters"></div><label class="bdu-search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="поиск по ID…" aria-label="Поиск по ID"></label></div>
+          <div class="bdu-count" id="count" aria-live="polite"></div><ul class="bdu-list" id="list"></ul>
+        </section>
+      </div>
+      <footer class="footer"><p>© 2025–2026 · @sigdevel · <span class="footer-muted">SDL · DAST · AppSec</span></p></footer>
+    </main>
+  </div>
+  <script src="/disclosures/data.js"></script>
+  <script src="/disclosures/registry.js"></script>
+</body>
+</html>
