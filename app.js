@@ -212,7 +212,25 @@ function SidebarNav({
     className: "sidebar-sub"
   }, L_("offensive research · SDL · DAST", "offensive research · SDL · DAST")))), /*#__PURE__*/React.createElement("nav", {
     className: "nav"
-  }, PAGES.map(p => /*#__PURE__*/React.createElement("a", {
+  }, PAGES.slice(0, 2).map(p => /*#__PURE__*/React.createElement("a", {
+    key: p.id,
+    href: `#${p.id}`,
+    "aria-current": page === p.id ? "page" : undefined,
+    onClick: e => {
+      e.preventDefault();
+      setPage(p.id);
+      setMobileOpen(false);
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "nav-dot",
+    "aria-hidden": "true"
+  }), p.label[tweaks.lang])), /*#__PURE__*/React.createElement("a", {
+    href: "/disclosures/",
+    onClick: () => setMobileOpen(false)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "nav-dot",
+    "aria-hidden": "true"
+  }), "BDU / CVE"), PAGES.slice(2).map(p => /*#__PURE__*/React.createElement("a", {
     key: p.id,
     href: `#${p.id}`,
     "aria-current": page === p.id ? "page" : undefined,
