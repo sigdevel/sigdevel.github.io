@@ -41,10 +41,11 @@ html[data-palette="paper"] {
   --surface-2: #fbfaf4;
 }
 html[data-palette="dark"] {
-  --bg: #14130f;
-  --bg-2: #1c1a14;
-  --surface: #1f1d16;
-  --surface-2: #26231b;
+  color-scheme: dark;
+  --bg: #0b0b0b;
+  --bg-2: #111111;
+  --surface: #171717;
+  --surface-2: #202020;
   --ink: #f2ede0;
   --ink-2: #d6d0bf;
   --muted: #9e988a;

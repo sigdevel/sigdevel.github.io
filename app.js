@@ -14,7 +14,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "typography": "serif-sans",
   "decor": 40,
   "density": "comfortable",
-  "palette": "cream",
+  "palette": "dark",
   "lang": "en"
 } /*EDITMODE-END*/;
 
