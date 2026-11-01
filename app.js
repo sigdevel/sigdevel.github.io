@@ -594,7 +594,7 @@ function CvPage({
       whiteSpace: 'pre-line'
     }
   }, /*#__PURE__*/React.createElement(L, {
-    en: "Extensive FSTEC certification experience (assurance levels 6/4/2):\\n1. Product research in internal audits. Stack: binary analysis, hardware analysis, hunting insecure configurations in product APIs (REST, GraphQL).\\n2. Work across the full regulatory lifecycle (from architectural audit and certification-application filing to finalization of the Protocol results).",
+    en: "Extensive certification experience under state service requirements (assurance levels 6/4/2):\\n1. Product research in internal audits. Stack: binary analysis, hardware analysis, hunting insecure configurations in product APIs (REST, GraphQL).\\n2. Work across the full regulatory lifecycle (from architectural audit and certification-application filing to finalization of the Protocol results).",
     ru: "Большой опыт проведения сертификаций ФСТЭК (УД6/4/2):\n1. Исследование ПО и ПАК на внутренних аудитах. Стек: бинарный анализ, hardware-анализ, поиск уязвимых конфигураций в API продуктов (REST, GraphQL).\n2. Проведение работ в рамках полного цикла нормативной базы (от проведения архитектурного аудита до подачи заявки на сертификацию, до финализации результатов Протокола).",
     lang: lang
   })), /*#__PURE__*/React.createElement("p", {
