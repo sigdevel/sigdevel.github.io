@@ -121,8 +121,8 @@ const PAGES = [{
 }, {
   id: "rss",
   label: {
-    en: "rss",
-    ru: "rss"
+    en: "CVE RSS",
+    ru: "CVE RSS"
   }
 }];
 function useTweaks() {
@@ -458,9 +458,9 @@ function HomePage({
     d: "M5 12 a7 7 0 0 1 7 7"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M5 5 a14 14 0 0 1 14 14"
-  }))), /*#__PURE__*/React.createElement("h3", null, "RSS"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement(L, {
-    en: "Mastodon / infosec.exchange feed",
-    ru: "\u041B\u0435\u043D\u0442\u0430 Mastodon / infosec.exchange",
+  }))), /*#__PURE__*/React.createElement("h3", null, "CVE RSS"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement(L, {
+    en: "CVE reports, PoC and references",
+    ru: "Публикации CVE, PoC и ссылки",
     lang: lang
   })), /*#__PURE__*/React.createElement("span", {
     className: "portal-arrow"
@@ -988,76 +988,8 @@ function ToolsPage({
     lang: lang
   }))))));
 }
-function RssPage({
-  tweaks
-}) {
-  const lang = tweaks.lang;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "page"
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "hero hero--narrow"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "hero-grid",
-    "aria-hidden": "true"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "hero-body"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "hero-eyebrow"
-  }, lang === "ru" ? "Публичная лента" : "Public stream"), /*#__PURE__*/React.createElement("h1", {
-    className: "hero-title"
-  }, "RSS"), /*#__PURE__*/React.createElement("p", {
-    className: "hero-lead"
-  }, /*#__PURE__*/React.createElement(L, {
-    en: "Public updates on infosec.exchange.",
-    ru: "\u041F\u0443\u0431\u043B\u0438\u0447\u043D\u044B\u0435 \u0430\u043F\u0434\u0435\u0439\u0442\u044B \u043D\u0430 infosec.exchange.",
-    lang: lang
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "hero-cta"
-  }, /*#__PURE__*/React.createElement("a", {
-    className: "btn btn--primary",
-    href: "https://infosec.exchange/@sigdevel",
-    target: "_blank",
-    rel: "noopener"
-  }, "@sigdevel@infosec.exchange"), /*#__PURE__*/React.createElement("a", {
-    className: "btn btn--ghost",
-    href: "https://infosec.exchange/@sigdevel.rss",
-    target: "_blank",
-    rel: "noopener"
-  }, "RSS feed")))), /*#__PURE__*/React.createElement("section", {
-    className: "section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-head"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "section-kicker"
-  }, "01"), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(L, {
-    en: "Latest post",
-    ru: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u043F\u043E\u0441\u0442",
-    lang: lang
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "post-embed"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "post-embed-head"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "post-avatar"
-  }, "@s"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
-    className: "post-name"
-  }, "@sigdevel"), /*#__PURE__*/React.createElement("p", {
-    className: "post-handle"
-  }, "@sigdevel@infosec.exchange \xB7 2d")), /*#__PURE__*/React.createElement("span", {
-    className: "post-platform"
-  }, "Mastodon")), /*#__PURE__*/React.createElement("p", {
-    className: "post-body"
-  }, /*#__PURE__*/React.createElement(L, {
-    en: "New structure-aware mutator set for MP4 box trees landed. Notes and reproducers in the reviews section.",
-    ru: "\u0412\u044B\u043B\u043E\u0436\u0435\u043D \u043D\u043E\u0432\u044B\u0439 \u043D\u0430\u0431\u043E\u0440 structure-aware \u043C\u0443\u0442\u0430\u0442\u043E\u0440\u043E\u0432 \u0434\u043B\u044F \u0434\u0435\u0440\u0435\u0432\u0430 MP4 box'\u043E\u0432. \u0417\u0430\u043C\u0435\u0442\u043A\u0438 \u0438 \u0440\u0435\u043F\u0440\u043E\u0434\u044C\u044E\u0441\u0435\u0440\u044B \u0432 \u0440\u0430\u0437\u0434\u0435\u043B\u0435 reviews.",
-    lang: lang
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "post-foot"
-  }, /*#__PURE__*/React.createElement("a", {
-    href: "https://infosec.exchange/@sigdevel",
-    target: "_blank",
-    rel: "noopener"
-  }, lang === 'ru' ? 'Открыть на Mastodon' : 'View on Mastodon', " \u2192")))));
+function RssPage({ tweaks }) {
+  return React.createElement(CveFeed.Page, { tweaks });
 }
 
 // ---------- Tweaks panel ----------
@@ -1147,7 +1079,8 @@ function App() {
   const [tweaks, setTweaks] = useTweaks();
   const [page, setPage] = useState(() => {
     const hash = window.location.hash.replace("#", "");
-    return PAGES.find(p => p.id === hash) ? hash : "home";
+    if (PAGES.some(p => p.id === hash)) return hash;
+    return /^\/rss\/(?:index\.html)?$/.test(window.location.pathname) ? "rss" : "home";
   });
   const [tweaksOpen, setTweaksOpen] = useState(false);
   const [tweaksAvailable, setTweaksAvailable] = useState(false);
@@ -1161,6 +1094,7 @@ function App() {
   }, []);
   useEffect(() => {
     window.location.hash = page;
+    document.title = page === "rss" ? "CVE RSS — @sigdevel" : "@sigdevel — Alexander Shvedov · SDL / DAST";
     window.scrollTo({
       top: 0,
       behavior: "instant"
