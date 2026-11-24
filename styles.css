@@ -1079,6 +1079,17 @@ html[data-palette="dark"] .year-pill.is-active { background: var(--accent); colo
 }
 
 /* ====== Tools ====== */
+.tools-placeholder {
+  min-height: calc(100vh - 2 * var(--page-pad));
+  display: grid;
+  place-items: center;
+}
+.tools-placeholder img {
+  display: block;
+  width: min(100%, 640px);
+  height: auto;
+}
+
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

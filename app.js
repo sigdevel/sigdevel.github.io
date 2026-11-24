@@ -859,128 +859,16 @@ function ReviewsPage({
     className: "review-more"
   }, lang === 'ru' ? 'читать' : 'read', " \u2192")))))));
 }
-function ToolsPage({
-  tweaks
-}) {
-  const lang = tweaks.lang;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "page"
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "hero hero--narrow"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "hero-grid",
-    "aria-hidden": "true"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "hero-body"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "hero-eyebrow"
-  }, lang === "ru" ? "Инструменты · браузер" : "Tools · browser-side"), /*#__PURE__*/React.createElement("h1", {
-    className: "hero-title"
-  }, "Tools"), /*#__PURE__*/React.createElement("p", {
-    className: "hero-lead"
-  }, /*#__PURE__*/React.createElement(L, {
-    en: "Small, focused utilities that run entirely in your browser.",
-    ru: "\u041D\u0435\u0431\u043E\u043B\u044C\u0448\u0438\u0435 \u0443\u0442\u0438\u043B\u0438\u0442\u044B, \u0440\u0430\u0431\u043E\u0442\u0430\u044E\u0449\u0438\u0435 \u0430\u0432\u0442\u043E\u043D\u043E\u043C\u043D\u043E \u043D\u0430 \u0441\u0442\u043E\u0440\u043E\u043D\u0435 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430.",
-    lang: lang
-  })))), /*#__PURE__*/React.createElement("section", {
-    className: "section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-head"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "section-kicker"
-  }, "01"), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(L, {
-    en: "Available now",
-    ru: "\u0421\u0435\u0439\u0447\u0430\u0441 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E",
-    lang: lang
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "tool-grid"
-  }, TOOLS.map(t => /*#__PURE__*/React.createElement("div", {
-    key: t.slug,
-    className: "tool-card"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tool-head"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tool-icon",
-    "aria-hidden": "true"
-  }, /*#__PURE__*/React.createElement("svg", {
-    viewBox: "0 0 32 32",
-    width: "26",
-    height: "26",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "1.5"
-  }, /*#__PURE__*/React.createElement("rect", {
-    x: "4",
-    y: "6",
-    width: "24",
-    height: "20",
-    rx: "2"
-  }), /*#__PURE__*/React.createElement("line", {
-    x1: "4",
-    y1: "11",
-    x2: "28",
-    y2: "11"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "7",
-    cy: "8.5",
-    r: "0.6",
-    fill: "currentColor"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "9",
-    cy: "8.5",
-    r: "0.6",
-    fill: "currentColor"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M9 17 L14 17 M9 20 L18 20 M9 23 L12 23"
-  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, t.name), /*#__PURE__*/React.createElement("span", {
-    className: `tool-status tool-status--${t.status}`
-  }, t.status))), /*#__PURE__*/React.createElement("p", {
-    className: "tool-usecase"
-  }, t.useCase[lang]), /*#__PURE__*/React.createElement("div", {
-    className: "tool-when"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "tool-when-label"
-  }, lang === 'ru' ? 'Когда пригодится' : 'When to use'), /*#__PURE__*/React.createElement("p", null, t.when[lang])), /*#__PURE__*/React.createElement("div", {
-    className: "tool-tags"
-  }, t.tags.map(tag => /*#__PURE__*/React.createElement("span", {
-    key: tag,
-    className: "tool-tag"
-  }, tag))), /*#__PURE__*/React.createElement("a", {
-    className: "btn btn--primary",
-    href: t.href
-  }, lang === 'ru' ? 'Открыть' : 'Launch', " \u2192"))), /*#__PURE__*/React.createElement("div", {
-    className: "tool-card tool-card--soon"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tool-head"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tool-icon",
-    "aria-hidden": "true"
-  }, /*#__PURE__*/React.createElement("svg", {
-    viewBox: "0 0 32 32",
-    width: "26",
-    height: "26",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "1.5",
-    strokeDasharray: "3 3"
-  }, /*#__PURE__*/React.createElement("rect", {
-    x: "4",
-    y: "6",
-    width: "24",
-    height: "20",
-    rx: "2"
-  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, lang === "ru" ? "APDU Explorer" : "APDU Explorer"), /*#__PURE__*/React.createElement("span", {
-    className: "tool-status tool-status--wip"
-  }, "WIP"))), /*#__PURE__*/React.createElement("p", {
-    className: "tool-usecase",
-    style: {
-      whiteSpace: 'pre-line'
-    }
-  }, /*#__PURE__*/React.createElement(L, {
-    en: "Interactive APDU session walker with fuzzing presets [in progress  see the repo for current state]",
-    ru: "Интерактивный обход APDU-сессий с fuzzing-пресетами.\n[в работе - актуальное состояние в репозитории]",
-    lang: lang
-  }))))));
+function ToolsPage() {
+  return React.createElement("div", {
+    className: "page tools-placeholder"
+  }, React.createElement("img", {
+    src: "/assets/logo.png",
+    alt: "The page has been removed",
+    width: 1254,
+    height: 1254,
+    decoding: "async"
+  }));
 }
 function RssPage({ tweaks }) {
   return React.createElement(CveFeed.Page, { tweaks });
