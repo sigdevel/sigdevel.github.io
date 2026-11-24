@@ -1,0 +1,1392 @@
+{
+  "version": 1,
+  "source": "https://github.com/sigdevel/sigdevel/tree/master/generated/openwall-cves",
+  "posts": [
+    {
+      "title": "CVE-2026-130635: GPAC/MP4Box: Uncontrolled Recursion in dasher_gather_deps via Cyclic Stream Dependencies",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/20/10",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-20-10/openwall-2026-11-20-10.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-20-10/openwall-2026-11-20-10.txt",
+      "date": "2026-11-20",
+      "message": 10,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/77/77_utils_list_c_718_gf_list_insert"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3585",
+        "https://github.com/gpac/gpac/commit/5439b94d091e764742a6b108509516d3810bd034",
+        "https://www.cve.org/CVERecord?id=CVE-2026-130635",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/130xxx/CVE-2026-130635.json",
+        "https://www.vulncheck.com/advisories/gpac-before-26.07.0-uncontrolled-recursion-via-dasher-gather-deps"
+      ]
+    },
+    {
+      "title": "CVE-2026-130793: GPAC/MP4Box: Stack Buffer Overflow in gf_filter_pid_resolve_file_template_ex via Crafted NHML Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/20/9",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-20-9/openwall-2026-11-20-9.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-20-9/openwall-2026-11-20-9.txt",
+      "date": "2026-11-20",
+      "message": 9,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/78/78_filter_core_filter_pid_c_9366_gf_filter_pid_resolve_file_template_ex"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3586",
+        "https://github.com/gpac/gpac/commit/5439b94d091e764742a6b108509516d3810bd034",
+        "https://www.cve.org/CVERecord?id=CVE-2026-130793",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/130xxx/CVE-2026-130793.json",
+        "https://www.vulncheck.com/advisories/gpac-before-26.07.0-stack-based-buffer-overflow-via-gf-filter-pid-resolve-file-template-ex"
+      ]
+    },
+    {
+      "title": "CVE-2026-130634: GPAC/MP4Box: Heap Buffer Overflow in gf_mpd_resolve_url via Crafted DASH Manifest",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/20/8",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-20-8/openwall-2026-11-20-8.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-20-8/openwall-2026-11-20-8.txt",
+      "date": "2026-11-20",
+      "message": 8,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/75/75_media_tools_mpd_c_5684_gf_mpd_resolve_url"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3582",
+        "https://github.com/gpac/gpac/commit/5439b94d091e764742a6b108509516d3810bd034",
+        "https://www.cve.org/CVERecord?id=CVE-2026-130634",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/130xxx/CVE-2026-130634.json",
+        "https://www.vulncheck.com/advisories/gpac-before-26.07.0-heap-based-buffer-overflow-via-gf-mpd-resolve-url"
+      ]
+    },
+    {
+      "title": "CVE-2026-130632: GPAC/MP4Box: Out-of-Bounds Read in m2tsdmx_send_packet via Crafted MPEG-2 TS VC-1 Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/20/7",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-20-7/openwall-2026-11-20-7.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-20-7/openwall-2026-11-20-7.txt",
+      "date": "2026-11-20",
+      "message": 7,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/74/74_m2tsdmx_send_packet"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3442",
+        "https://github.com/gpac/gpac/commit/d65d699012bd82a0839e8af6747bca438e26938a",
+        "https://www.cve.org/CVERecord?id=CVE-2026-130632",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/130xxx/CVE-2026-130632.json",
+        "https://www.vulncheck.com/advisories/gpac-before-26.02.0-out-of-bounds-read-via-m2tsdmx-send-packet"
+      ]
+    },
+    {
+      "title": "CVE-2026-130633: GPAC/MP4Box: Heap Use-After-Free in gf_props_del_property via PID Property Arguments",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/18/15",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-18-15/openwall-2026-11-18-15.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-18-15/openwall-2026-11-18-15.txt",
+      "date": "2026-11-18",
+      "message": 15,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/72/72_gf_props_del_property"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3441",
+        "https://github.com/gpac/gpac/commit/d65d699012bd82a0839e8af6747bca438e26938a",
+        "https://www.cve.org/CVERecord?id=CVE-2026-130633",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/130xxx/CVE-2026-130633.json",
+        "https://www.vulncheck.com/advisories/gpac-before-26.02.0-use-after-free-via-pid-property-arguments"
+      ]
+    },
+    {
+      "title": "CVE-2026-130631: GPAC/MP4Box: Uninitialized Pointer Access in GetESD via RVC Configuration",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/18/14",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-18-14/openwall-2026-11-18-14.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-18-14/openwall-2026-11-18-14.txt",
+      "date": "2026-11-18",
+      "message": 14,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/73/73_isomedia_track_c_GetESD"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3592",
+        "https://github.com/gpac/gpac/commit/25081b9610477fc8de48d2f1cadd3fd232a9dcbc",
+        "https://www.cve.org/CVERecord?id=CVE-2026-130631",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/130xxx/CVE-2026-130631.json",
+        "https://www.vulncheck.com/advisories/gpac-before-26.07.0-uninitialized-pointer-access-in-getesd-via-rvc-configuration"
+      ]
+    },
+    {
+      "title": "CVE-2026-130630: GPAC/MP4Box: NULL Pointer Dereference in dasher_configure_pid via Crafted MPEG-2 TS Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/18/13",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-18-13/openwall-2026-11-18-13.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-18-13/openwall-2026-11-18-13.txt",
+      "date": "2026-11-18",
+      "message": 13,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/70/70_dasher_configure_pid"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3500",
+        "https://github.com/gpac/gpac/commit/8ed521b69dcbf9a5a79b52b7d43d507ccb048c84",
+        "https://www.cve.org/CVERecord?id=CVE-2026-130630",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/130xxx/CVE-2026-130630.json",
+        "https://www.vulncheck.com/advisories/gpac-26.02.0-null-pointer-dereference-via-dasher-configure-pid"
+      ]
+    },
+    {
+      "title": "CVE-2025-71471: GPAC/MP4Box: Use of Uninitialized Memory in stbl_AddCTS via Crafted MP4 Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/18/12",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-18-12/openwall-2026-11-18-12.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-18-12/openwall-2026-11-18-12.txt",
+      "date": "2026-11-18",
+      "message": 12,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/69/69_utils_list_c_672"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3412",
+        "https://github.com/gpac/gpac/commit/a8c83bd36ca074b81c39ae5ccc0c8580d098072a",
+        "https://www.cve.org/CVERecord?id=CVE-2025-71471",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/71xxx/CVE-2025-71471.json",
+        "https://www.vulncheck.com/advisories/gpac-before-26.02.0-uninitialized-memory-use-in-stbl-addcts"
+      ]
+    },
+    {
+      "title": "CVE-2025-71469: GPAC/MP4Box: Type Confusion in XMT/BT Scene Loader Causing a Crash in gf_scene_ns_connect_object",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/17/22",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-17-22/openwall-2026-11-17-22.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-17-22/openwall-2026-11-17-22.txt",
+      "date": "2026-11-17",
+      "message": 22,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/30/30_compositor_scene_ns_c_479_in_gf_scene_ns_connect_object"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3271",
+        "https://github.com/gpac/gpac/commit/62714f27c64a3d1eb7e880f9eed2d38673cb43ce",
+        "https://www.cve.org/CVERecord?id=CVE-2025-71469",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/71xxx/CVE-2025-71469.json"
+      ]
+    },
+    {
+      "title": "CVE-2025-71468: GPAC/MP4Box: NULL Pointer Dereference in gf_dash_group_get_audio_channels via Crafted DASH Manifest",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/17/21",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-17-21/openwall-2026-11-17-21.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-17-21/openwall-2026-11-17-21.txt",
+      "date": "2026-11-17",
+      "message": 21,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/28/28_gf_dash_group_get_audio_channels_media_tools_dash_client_c_10769"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3269",
+        "https://github.com/gpac/gpac/commit/62714f27c64a3d1eb7e880f9eed2d38673cb43ce",
+        "https://www.cve.org/CVERecord?id=CVE-2025-71468",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/71xxx/CVE-2025-71468.json"
+      ]
+    },
+    {
+      "title": "CVE-2025-71470: MicroQuickJS: Out-of-Bounds Read in build_backtrace via Crafted JavaScript Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/16/9",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-16-9/openwall-2026-11-16-9.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-16-9/openwall-2026-11-16-9.txt",
+      "date": "2026-11-16",
+      "message": 9,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/mquickjs/1/mquickjs_c_3981"
+      ],
+      "references": [
+        "https://github.com/bellard/mquickjs/issues/24",
+        "https://github.com/bellard/mquickjs/commit/99eed3f94cb66ea7e02fd3472ca7374dee31bb89",
+        "https://www.cve.org/CVERecord?id=CVE-2025-71470",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/71xxx/CVE-2025-71470.json"
+      ]
+    },
+    {
+      "title": "CVE-2025-71467: GPAC/MP4Box: NULL Pointer Dereference in gf_node_get_field_by_name via Crafted XMT Input Product: GPAC (MP4Box)",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/16/8",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-16-8/openwall-2026-11-16-8.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-16-8/openwall-2026-11-16-8.txt",
+      "date": "2026-11-16",
+      "message": 8,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/27/27_gf_node_get_field_by_name_scenegraph_base_scenegraph_c_2088"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3268",
+        "https://github.com/gpac/gpac/commit/62714f27c64a3d1eb7e880f9eed2d38673cb43ce",
+        "https://www.cve.org/CVERecord?id=CVE-2025-71467",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/71xxx/CVE-2025-71467.json"
+      ]
+    },
+    {
+      "title": "CVE-2025-71466: GPAC/MP4Box: NULL Pointer Dereference in m2tsdmx_update_sdt via Crafted MPEG-2 TS Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/16/7",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-16-7/openwall-2026-11-16-7.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-16-7/openwall-2026-11-16-7.txt",
+      "date": "2026-11-16",
+      "message": 7,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/26/26_m2tsdmx_update_sdt_filters_dmx_m2ts_c_218"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3267",
+        "https://github.com/gpac/gpac/commit/62714f27c64a3d1eb7e880f9eed2d38673cb43ce",
+        "https://www.cve.org/CVERecord?id=CVE-2025-71466",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/71xxx/CVE-2025-71466.json"
+      ]
+    },
+    {
+      "title": "CVE-2026-129490: littlefs: Type Confusion and Stack Out-of-Bounds Read in lfs_dir_traverse via Crafted v1 Image Migration",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/16/6",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-16-6/openwall-2026-11-16-6.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-16-6/openwall-2026-11-16-6.txt",
+      "date": "2026-11-16",
+      "message": 6,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/littlefs/1/1_lfs_dir_traverse_lfs_c_1059.img"
+      ],
+      "references": [
+        "https://github.com/littlefs-project/littlefs/issues/1213",
+        "https://github.com/littlefs-project/littlefs/pull/1224",
+        "https://github.com/littlefs-project/littlefs/blob/v2.11.3/lfs.c#L1056-L1063",
+        "https://github.com/sigdevel/pocs/blob/main/res/littlefs/1/fuzz_migrate.c",
+        "https://www.cve.org/CVERecord?id=CVE-2026-129490",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/129xxx/CVE-2026-129490.json"
+      ]
+    },
+    {
+      "title": "CVE-2026-128240: GPAC/MP4Box: Use-After-Free in gf_sg_proto_del During XMT Scene Teardown",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/14/14",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-14-14/openwall-2026-11-14-14.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-14-14/openwall-2026-11-14-14.txt",
+      "date": "2026-11-14",
+      "message": 14,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/223/223_gf_sg_proto_del_scenegraph_vrml_proto_c.xmt"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/4031",
+        "https://github.com/gpac/gpac/pull/4037",
+        "https://github.com/gpac/gpac/commit/a2e5c62c213b5329a4572fe8e7c333e1ca26d028",
+        "https://www.cve.org/CVERecord?id=CVE-2026-128240",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/128xxx/CVE-2026-128240.json",
+        "https://www.vulncheck.com/advisories/gpac-through-26.07.0-use-after-free-in-gf-sg-proto-del-during-scene-teardown"
+      ]
+    },
+    {
+      "title": "CVE-2026-124031: GPAC/MP4Box: Type Confusion in Appearance Handling via Crafted XMT Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/14/13",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-14-13/openwall-2026-11-14-13.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-14-13/openwall-2026-11-14-13.txt",
+      "date": "2026-11-14",
+      "message": 13,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/222/222_gf_node_get_tag_compositor_texturing_c_370.xmt"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/4030",
+        "https://github.com/gpac/gpac/commit/43a8329a90ae2907716b593cc3746458516c7c39",
+        "https://www.cve.org/CVERecord?id=CVE-2026-124031",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/124xxx/CVE-2026-124031.json",
+        "https://www.vulncheck.com/advisories/gpac-through-26.07.0-type-confusion-via-drawable-get-aspect-2d-mpeg4"
+      ]
+    },
+    {
+      "title": "CVE-2026-124030: GPAC/MP4Box: Type Confusion in XMT Field-Replace Commands",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/14/12",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-14-12/openwall-2026-11-14-12.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-14-12/openwall-2026-11-14-12.txt",
+      "date": "2026-11-14",
+      "message": 12,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/224/224_gf_sg_command_apply_scenegraph_commands_c_346.xmt"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/4032",
+        "https://github.com/gpac/gpac/commit/1359c4da9329cedceeb8fcfeab6d97e0927236e1",
+        "https://www.cve.org/CVERecord?id=CVE-2026-124030",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/124xxx/CVE-2026-124030.json",
+        "https://www.vulncheck.com/advisories/gpac-through-26.07.0-type-confusion-via-gf-sg-command-apply-xmt-field-replace"
+      ]
+    },
+    {
+      "title": "CVE-2026-128239: GPAC/MP4Box: NULL Pointer Dereference in MPEG-4 Form Handlers via Crafted XMT Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/13/3",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-13-3/openwall-2026-11-13-3.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-11-13-3/openwall-2026-11-13-3.txt",
+      "date": "2026-11-13",
+      "message": 3,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/221/221_ab_apply_compositor_mpeg4_form_c_627.xmt"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/4029",
+        "https://github.com/gpac/gpac/pull/4039",
+        "https://github.com/gpac/gpac/commit/bc416b997622e43de65afab3bae9b7d05d72f2b0",
+        "https://www.cve.org/CVERecord?id=CVE-2026-128239",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/128xxx/CVE-2026-128239.json",
+        "https://www.vulncheck.com/advisories/gpac-through-26.07.0-null-pointer-dereference-via-mpeg-4-form-handlers"
+      ]
+    },
+    {
+      "title": "CVE-2025-70102: dhcpcd: NULL Pointer Dereference in Configuration Option Parsing Product: dhcpcd",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/30/8",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-30-8/openwall-2026-10-30-8.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-30-8/openwall-2026-10-30-8.txt",
+      "date": "2026-10-30",
+      "message": 8,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/dhcpcd/1/if-options_c_1886/if-options_c_1886"
+      ],
+      "references": [
+        "https://www.cve.org/CVERecord?id=CVE-2025-70102",
+        "https://github.com/NetworkConfiguration/dhcpcd/issues/567",
+        "https://github.com/sigdevel/pocs/blob/main/res/dhcpcd/1/if-options_c_1886/if-options_c_1886",
+        "https://github.com/NetworkConfiguration/dhcpcd/commit/117742d755b591764036dd4218f314f748a3d2b7"
+      ]
+    },
+    {
+      "title": "CVE-2025-60482: GPAC/MP4Box: Heap Use-After-Free in AC-4 Descriptor Cleanup",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/29/3",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-29-3/openwall-2026-10-29-3.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-29-3/openwall-2026-10-29-3.txt",
+      "date": "2026-10-29",
+      "message": 3,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/46/46_gf_odf_ac4_cfg_clean_list_odf_descriptors_c_2411"
+      ],
+      "references": [
+        "https://www.cve.org/CVERecord?id=CVE-2025-60482",
+        "https://github.com/gpac/gpac/issues/3297",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60482.json",
+        "https://infosec.exchange/@sigdevel/117456522954593448"
+      ]
+    },
+    {
+      "title": "CVE-2025-60475: GPAC/MP4Box: Global Buffer Overflow Read in gf_ac4_parser_bs on crafted AC-4 stream",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/28/2",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-28-2/openwall-2026-10-28-2.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-28-2/openwall-2026-10-28-2.txt",
+      "date": "2026-10-28",
+      "message": 2,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/40/40_gf_ac4_parser_bs_media_tools_av_parsers_c_16140"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3291",
+        "https://github.com/gpac/gpac/commit/e02d1fd24cdc26acb1b236ab38b3832cffcae21b",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60475",
+        "https://infosec.exchange/@sigdevel/117456354623831878"
+      ]
+    },
+    {
+      "title": "CVE-2025-60477: GPAC/MP4Box: NULL Pointer Dereference in gf_filter_pid_resolve_file_template_ex on crafted MP4 with special metadata",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/26/1",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-26-1/openwall-2026-10-26-1.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-26-1/openwall-2026-10-26-1.txt",
+      "date": "2026-10-26",
+      "message": 1,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/48/48_gf_filter_pid_resolve_file_template_ex_filter_core_filter_pid_c_9045"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3301",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-60477",
+        "https://infosec.exchange/@sigdevel/116658486442433074"
+      ]
+    },
+    {
+      "title": "CVE-2025-60493: GPAC/MP4Box: NULL Pointer Dereference in check_media_profile via Crafted MP4 Input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/24/10",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-24-10/openwall-2026-10-24-10.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-24-10/openwall-2026-10-24-10.txt",
+      "date": "2026-10-24",
+      "message": 10,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/63/63_check_media_profile_applications_mp4box_mp4box_c_3883"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3328",
+        "https://github.com/gpac/gpac/commit/9afeea23f5c6584c02aefe1e1560c2844dfb8f7e",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60493",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60493.json",
+        "https://infosec.exchange/@sigdevel/117451489672249554"
+      ]
+    },
+    {
+      "title": "CVE-2025-60497: NULL pointer dereference in GPAC/MP4Box GetESD via crafted MP4 input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/23/19",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-19/openwall-2026-10-23-19.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-19/openwall-2026-10-23-19.txt",
+      "date": "2026-10-23",
+      "message": 19,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/62/62_GetESD_isomedia_track_c_107"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3336",
+        "https://github.com/gpac/gpac/commit/91083fcfce01aa596a13a6962768d13a60bfc8bb",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60497",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60497.json",
+        "https://infosec.exchange/@sigdevel/117451504006040011"
+      ]
+    },
+    {
+      "title": "CVE-2025-60494: invalid memory read in GPAC/MP4Box gf_props_equal_internal via crafted MP4 input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/23/18",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-18/openwall-2026-10-23-18.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-18/openwall-2026-10-23-18.txt",
+      "date": "2026-10-23",
+      "message": 18,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/64/64_gf_props_equal_internal_filter_core_filter_props_c_867"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3329",
+        "https://github.com/gpac/gpac/commit/fcb9083292befe61d3e2466b18edfedba49da098",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60494",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60494.json",
+        "https://infosec.exchange/@sigdevel/117451480059519560"
+      ]
+    },
+    {
+      "title": "CVE-2025-60492: uncontrolled recursion in GPAC/MP4Box BIFS decoder via crafted MP4 input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/23/17",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-17/openwall-2026-10-23-17.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-17/openwall-2026-10-23-17.txt",
+      "date": "2026-10-23",
+      "message": 17,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/59/59_Anchor_Create_scenegraph_mpeg4_nodes_c_171"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3324",
+        "https://github.com/gpac/gpac/commit/8e7b9a3a04331286b89d1803c65a2d6edc11b4c4",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60492",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60492.json",
+        "https://infosec.exchange/@sigdevel/117456655329648201"
+      ]
+    },
+    {
+      "title": "CVE-2025-60491: heap use-after-free in GPAC/MP4Box dasher_flush_segment via crafted MPEG-2 TS input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/23/16",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-16/openwall-2026-10-23-16.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-16/openwall-2026-10-23-16.txt",
+      "date": "2026-10-23",
+      "message": 16,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/61/61_dasher_flush_segment_filters_dasher_c_8062"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3326",
+        "https://github.com/gpac/gpac/commit/f6128214feb69cd689e4b9944a2621bc4ad8faf0",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60491",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60491.json",
+        "https://infosec.exchange/@sigdevel/117451513352278768"
+      ]
+    },
+    {
+      "title": "CVE-2025-60490: heap use-after-free in GPAC/MP4Box gf_filter_pid_send_event_downstream via crafted MPEG-2 TS input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/23/15",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-15/openwall-2026-10-23-15.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-15/openwall-2026-10-23-15.txt",
+      "date": "2026-10-23",
+      "message": 15,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/54/54_gf_filter_pid_send_event_downstream_filter_core_filter_pid_c_7919"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3315",
+        "https://github.com/gpac/gpac/commit/d0793f92e04fe284a25c2a9335cc5edc68deb6d4",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60490",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60490.json",
+        "https://infosec.exchange/@sigdevel/117456620287496398",
+        "https://bdu.fstec.ru/vul/2025-13150"
+      ]
+    },
+    {
+      "title": "CVE-2025-60489: NULL pointer dereference in GPAC/MP4Box dasher_insert_timeline_entry via crafted MP4 input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/23/14",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-14/openwall-2026-10-23-14.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-14/openwall-2026-10-23-14.txt",
+      "date": "2026-10-23",
+      "message": 14,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/60/60_dasher_insert_timeline_entry_filters_dasher_c_7760"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3325",
+        "https://github.com/gpac/gpac/commit/4860a1a6f128ccc9ae37b4b738d22029f9672457",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60489",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60489.json",
+        "https://infosec.exchange/@sigdevel/117451521960820132"
+      ]
+    },
+    {
+      "title": "CVE-2025-60487: NULL pointer dereference in GPAC/MP4Box gf_isom_get_esd via crafted XML input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/23/13",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-13/openwall-2026-10-23-13.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-23-13/openwall-2026-10-23-13.txt",
+      "date": "2026-10-23",
+      "message": 13,
+      "poc": [],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3320",
+        "https://github.com/gpac/gpac/commit/e6d01820d7bf3967d931fedb379ee5f209bc133b",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60487",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60487.json",
+        "https://infosec.exchange/@sigdevel/117456633862790827",
+        "https://bdu.fstec.ru/vul/2025-13151"
+      ]
+    },
+    {
+      "title": "CVE-2025-71438: Out-of-bounds Read in GPAC/MP4Box via gf_odf_ac4_cfg_dsi_v1 on crafted AC-4 stream with invalid frame rate index",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/22/26",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-26/openwall-2026-10-22-26.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-26/openwall-2026-10-22-26.txt",
+      "date": "2026-10-22",
+      "message": 26,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/50/50_gf_odf_ac4_cfg_dsi_v1_odf_descriptors_c_2179"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3303",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-71438",
+        "https://github.com/gpac/gpac/releases/tag/v26.07.0",
+        "https://infosec.exchange/@sigdevel/117484156995584313",
+        "https://github.com/gpac/gpac/commit/13eb5b76560aaf7813b865a2ad433258478e2695"
+      ]
+    },
+    {
+      "title": "CVE-2025-60496: Divide by zero in GPAC/MP4Box reframer via crafted truncated MP4 file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/22/25",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-25/openwall-2026-10-22-25.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-25/openwall-2026-10-22-25.txt",
+      "date": "2026-10-22",
+      "message": 25,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/65/65_reframer_send_packet_filters_reframer_c_1026"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3334",
+        "https://github.com/gpac/gpac/commit/f03c946aae129980f0426d4cbae9746d0536fee6",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60496",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60496.json",
+        "https://infosec.exchange/@sigdevel/117451461416101711"
+      ]
+    },
+    {
+      "title": "CVE-2025-60479: NULL pointer dereference in GPAC/MP4Box StatSFVec2f via crafted BIFS scene CVE-2025-60479: NULL pointer dereference in GPAC/MP4Box StatSFVec2f via crafted BIFS scene",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/22/24",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-24/openwall-2026-10-22-24.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-24/openwall-2026-10-22-24.txt",
+      "date": "2026-10-22",
+      "message": 24,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/58/58_StatSFVec2f_scene_manager_scene_stats_c_192"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3322",
+        "https://github.com/gpac/gpac/commit/75786eb61b7cc838b57c3d4f8004b4f13b5b724c",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60479",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60479.json",
+        "https://infosec.exchange/@sigdevel/117451528497213210",
+        "https://bdu.fstec.ru/vul/2025-13152"
+      ]
+    },
+    {
+      "title": "CVE-2025-60478: Heap use-after-free in GPAC/MP4Box packet destruction via crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/22/23",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-23/openwall-2026-10-22-23.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-23/openwall-2026-10-22-23.txt",
+      "date": "2026-10-22",
+      "message": 23,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/47/47_gf_filter_packet_destroy_filter_core_filter_pck_c_678"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3300",
+        "https://github.com/gpac/gpac/commit/c592a144bbe339ee581ca88aaa3247362795b742",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60478",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60478.json",
+        "https://infosec.exchange/@sigdevel/117456560052551246",
+        "https://bdu.fstec.ru/vul/2025-09883"
+      ]
+    },
+    {
+      "title": "CVE-2025-60476: Heap use-after-free in GPAC/MP4Box AC-4 descriptor cleanup",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/22/22",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-22/openwall-2026-10-22-22.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-22/openwall-2026-10-22-22.txt",
+      "date": "2026-10-22",
+      "message": 22,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/42/42_gf_odf_ac4_cfg_clean_list_odf_descriptors_c_2419"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3293",
+        "https://github.com/gpac/gpac/commit/e02d1fd24cdc26acb1b236ab38b3832cffcae21b",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60476",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60476.json",
+        "https://infosec.exchange/@sigdevel/117456471347684902",
+        "https://bdu.fstec.ru/vul/2025-08612"
+      ]
+    },
+    {
+      "title": "CVE-2025-60469: NULL pointer dereference in GPAC/MP4Box AC-4 parser via crafted file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/22/21",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-21/openwall-2026-10-22-21.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-22-21/openwall-2026-10-22-21.txt",
+      "date": "2026-10-22",
+      "message": 21,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/41/41_gf_ac4_presentation_ch_mode_media_tools_av_parsers_c_15641"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3292",
+        "https://github.com/gpac/gpac/commit/e02d1fd24cdc26acb1b236ab38b3832cffcae21b",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60469",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60469.json",
+        "https://infosec.exchange/@sigdevel/117456377012352192",
+        "https://bdu.fstec.ru/vul/2025-08611"
+      ]
+    },
+    {
+      "title": "CVE-2025-60480: Heap buffer overflow in GPAC/MP4Box gf_odf_ac4_cfg_alternative_info via crafted AC-4 file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/20/9",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-20-9/openwall-2026-10-20-9.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-20-9/openwall-2026-10-20-9.txt",
+      "date": "2026-10-20",
+      "message": 9,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/44/44_gf_odf_ac4_cfg_alternative_info_odf_descriptors_c_1899"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3295",
+        "https://github.com/gpac/gpac/commit/e02d1fd24cdc26acb1b236ab38b3832cffcae21b",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60480",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/60xxx/CVE-2025-60480.json",
+        "https://infosec.exchange/@sigdevel/117456490628466269",
+        "https://bdu.fstec.ru/vul/2025-08615"
+      ]
+    },
+    {
+      "title": "CVE-2025-55667: NULL pointer dereference in GPAC/MP4Box dump_isom_saps via crafted MP4 input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/20/8",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-20-8/openwall-2026-10-20-8.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-20-8/openwall-2026-10-20-8.txt",
+      "date": "2026-10-20",
+      "message": 8,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/57/57_dump_isom_saps_filedump_c_1743"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3321",
+        "https://github.com/gpac/gpac/commit/e6d01820d7bf3967d931fedb379ee5f209bc133b",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55667"
+      ]
+    },
+    {
+      "title": "CVE-2025-55654: Use-after-free in GPAC/MP4Box gf_filter_pid_get_packet via crafted NHML export input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/20/7",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-20-7/openwall-2026-10-20-7.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-20-7/openwall-2026-10-20-7.txt",
+      "date": "2026-10-20",
+      "message": 7,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/22/22_data"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3249",
+        "https://github.com/gpac/gpac/commit/0ccd2927c7145f5ab0352c5b15f787757b34eb18",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55654",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/55xxx/CVE-2025-55654.json",
+        "https://infosec.exchange/@sigdevel/116769098607015606",
+        "https://bdu.fstec.ru/vul/2025-10087"
+      ]
+    },
+    {
+      "title": "CVE-2025-52290: FFmpeg NULL pointer dereference in avpriv_h264_has_num_reorder_frames",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/20/6",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-20-6/openwall-2026-10-20-6.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-20-6/openwall-2026-10-20-6.txt",
+      "date": "2026-10-20",
+      "message": 6,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/FFmpeg/ffmpeg/1/1_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/sigdevel/pocs/blob/main/res/FFmpeg/ffmpeg/1/1_libavcodec_h264dec.c.64_17.md",
+        "https://www.cve.org/CVERecord?id=CVE-2025-52290",
+        "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/52xxx/CVE-2025-52290.json",
+        "https://infosec.exchange/@sigdevel/116733488628458667",
+        "https://ffmpeg.org/"
+      ]
+    },
+    {
+      "title": "CVE-2025-55653: Divide by Zero in GPAC/MP4Box via gf_parse_lfrac on crafted MP4 with zero-denominator fraction",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/17/4",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-17-4/openwall-2026-10-17-4.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-17-4/openwall-2026-10-17-4.txt",
+      "date": "2026-10-17",
+      "message": 4,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/21/21_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3247",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55653",
+        "https://infosec.exchange/@sigdevel/116769079013422405"
+      ]
+    },
+    {
+      "title": "CVE-2025-55640: Heap Buffer Overflow in GPAC/MP4Box via stbl_AddSize on crafted MP4 with corrupted sample metadata",
+      "url": "https://www.openwall.com/lists/oss-security/2026/10/17/2",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-17-2/openwall-2026-10-17-2.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-10-17-2/openwall-2026-10-17-2.txt",
+      "date": "2026-10-17",
+      "message": 2,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/25/25_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3261",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55640",
+        "https://infosec.exchange/@sigdevel/116769271709415444"
+      ]
+    },
+    {
+      "title": "CVE-2025-70101: lwext4 out-of-bounds read in ext4_ext_binsearch_idx",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/29/6",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-29-6/openwall-2026-06-29-6.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-29-6/openwall-2026-06-29-6.txt",
+      "date": "2026-06-29",
+      "message": 6,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/lwext4/3/sig11_lwext4_ext4_extent_815"
+      ],
+      "references": [
+        "https://github.com/gkostka/lwext4/issues/91",
+        "https://github.com/sigdevel/pocs/blob/main/res/lwext4/3/sig11_lwext4_ext4_extent_815",
+        "https://github.com/Aladdin-R-D/lwext4/releases/tag/v1.0.1",
+        "https://www.cve.org/CVERecord?id=CVE-2025-70101",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-70101",
+        "https://infosec.exchange/@sigdevel/116668958927817708",
+        "https://bdu.fstec.ru/vul/2025-15479"
+      ]
+    },
+    {
+      "title": "CVE-2025-70100: lwext4 divide-by-zero in ext4_block_set_lb_size",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/29/5",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-29-5/openwall-2026-06-29-5.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-29-5/openwall-2026-06-29-5.txt",
+      "date": "2026-06-29",
+      "message": 5,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/lwext4/2/sig8_2_lwext4_ext4_blockdev_c_127"
+      ],
+      "references": [
+        "https://github.com/gkostka/lwext4/issues/90",
+        "https://github.com/sigdevel/pocs/blob/main/res/lwext4/2/sig8_2_lwext4_ext4_blockdev_c_127",
+        "https://github.com/Aladdin-R-D/lwext4/releases/tag/v1.0.1",
+        "https://www.cve.org/CVERecord?id=CVE-2025-70100",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-70100",
+        "https://infosec.exchange/@sigdevel/116668952003072580",
+        "https://bdu.fstec.ru/vul/2025-15478"
+      ]
+    },
+    {
+      "title": "CVE-2025-70099: lwext4 NULL pointer dereference in ext4_dir_en_get_name_len",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/29/4",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-29-4/openwall-2026-06-29-4.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-29-4/openwall-2026-06-29-4.txt",
+      "date": "2026-06-29",
+      "message": 4,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/lwext4/1/sig11_2_1_lwext4_ext4_dir_h_126"
+      ],
+      "references": [
+        "https://github.com/gkostka/lwext4/issues/89",
+        "https://github.com/sigdevel/pocs/blob/main/res/lwext4/1/sig11_2_1_lwext4_ext4_dir_h_126",
+        "https://github.com/Aladdin-R-D/lwext4/releases/tag/v1.0.1",
+        "https://www.cve.org/CVERecord?id=CVE-2025-70099",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-70099",
+        "https://infosec.exchange/@sigdevel/116668939725424227",
+        "https://bdu.fstec.ru/vul/2025-15477"
+      ]
+    },
+    {
+      "title": "CVE-2023-0645: libjxl/cjxl out-of-bounds read in EXIF metadata parsing",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/29/3",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-29-3/openwall-2026-06-29-3.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-29-3/openwall-2026-06-29-3.txt",
+      "date": "2026-06-29",
+      "message": 3,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/libjxl/2022_01_25/sig_11_src_000122_poc"
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-0645",
+        "https://github.com/libjxl/libjxl/issues/2100",
+        "https://github.com/libjxl/libjxl/pull/2101",
+        "https://github.com/libjxl/libjxl/pull/2101/commits/d95b050c1822a5b1ede9e0dc937e43fca1b10159"
+      ]
+    },
+    {
+      "title": "CVE-2025-60474: Heap-based Buffer Overflow in GPAC/MP4Box via gf_media_import on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/27/5",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-5/openwall-2026-06-27-5.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-5/openwall-2026-06-27-5.txt",
+      "date": "2026-06-27",
+      "message": 5,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/38/38_gf_media_import_media_tools_media_import_c_1297"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3287",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60474",
+        "https://infosec.exchange/@sigdevel/116780566799952592"
+      ]
+    },
+    {
+      "title": "CVE-2025-60467: Use-After-Free in GPAC/MP4Box via gf_filter_pid_inst_swap_delete_task on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/27/4",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-4/openwall-2026-06-27-4.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-4/openwall-2026-06-27-4.txt",
+      "date": "2026-06-27",
+      "message": 4,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/37/37_gf_filter_pid_inst_swap_delete_task_filter_core_filter_pid_c_574"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3286",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60467",
+        "https://infosec.exchange/@sigdevel/116780518074911144"
+      ]
+    },
+    {
+      "title": "CVE-2025-60473: NULL Pointer Dereference in GPAC/MP4Box via gf_filter_in_parent_chain on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/27/3",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-3/openwall-2026-06-27-3.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-3/openwall-2026-06-27-3.txt",
+      "date": "2026-06-27",
+      "message": 3,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/36/36_gf_filter_in_parent_chain_filter_core_filter_pid_c_2145"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3285",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60473",
+        "https://infosec.exchange/@sigdevel/116780471059317580"
+      ]
+    },
+    {
+      "title": "CVE-2025-60466: Expired Pointer Dereference in GPAC/MP4Box via gf_filter_pid_get_packet on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/27/2",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-2/openwall-2026-06-27-2.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-2/openwall-2026-06-27-2.txt",
+      "date": "2026-06-27",
+      "message": 2,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/35/35_gf_filter_pid_get_packet_filter_core_filter_pid_c_6827"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3284",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60466",
+        "https://infosec.exchange/@sigdevel/116780402249845037"
+      ]
+    },
+    {
+      "title": "CVE-2025-60465: Use-After-Free in GPAC/MP4Box via gf_filter_pid_inst_swap on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/27/1",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-1/openwall-2026-06-27-1.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-27-1/openwall-2026-06-27-1.txt",
+      "date": "2026-06-27",
+      "message": 1,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/34/34_gf_filter_pid_inst_swap_filter_core_filter_pid_c_633"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3283",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60465",
+        "https://infosec.exchange/@sigdevel/116778494176930561"
+      ]
+    },
+    {
+      "title": "CVE-2025-60464: NULL Pointer Dereference in GPAC/MP4Box via gf_sei_load_from_state_internal on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/26/4",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-26-4/openwall-2026-06-26-4.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-26-4/openwall-2026-06-26-4.txt",
+      "date": "2026-06-26",
+      "message": 4,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/32/32_filters_sei_load_c_225_in_gf_sei_load_from_state_internal"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3278",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60464",
+        "https://infosec.exchange/@sigdevel/116778370895014131"
+      ]
+    },
+    {
+      "title": "CVE-2025-60471: Use-After-Free in GPAC/MP4Box via gf_filter_pid_reconfigure_task_discard on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/26/3",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-26-3/openwall-2026-06-26-3.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-26-3/openwall-2026-06-26-3.txt",
+      "date": "2026-06-26",
+      "message": 3,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/31/31_gf_filter_pid_reconfigure_task_discard_filter_core_filter_pid_c_1341"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3279",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60471",
+        "https://infosec.exchange/@sigdevel/116778301425195980"
+      ]
+    },
+    {
+      "title": "CVE-2025-55639: NULL Pointer Dereference in GPAC/MP4Box via gf_isom_add_track_kind on crafted MP4 file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/26/2",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-26-2/openwall-2026-06-26-2.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-26-2/openwall-2026-06-26-2.txt",
+      "date": "2026-06-26",
+      "message": 2,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/23/23_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3260",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55639",
+        "https://infosec.exchange/@sigdevel/116769184815236865"
+      ]
+    },
+    {
+      "title": "CVE-2025-52292: Stack-based Buffer Overflow in GPAC/MP4Box via filein_process on crafted MP4 file during DASH segmentation",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/21",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-21/openwall-2026-06-13-21.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-21/openwall-2026-06-13-21.txt",
+      "date": "2026-06-13",
+      "message": 21,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/1/1_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3129",
+        "https://www.cve.org/CVERecord?id=CVE-2025-52292",
+        "https://infosec.exchange/@sigdevel/116707273214520860"
+      ]
+    },
+    {
+      "title": "CVE-2025-55662: Divide by Zero in GPAC/MP4Box via gf_opus_parse_packet_header on crafted MP4 file with malformed Opus header",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/20",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-20/openwall-2026-06-13-20.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-20/openwall-2026-06-13-20.txt",
+      "date": "2026-06-13",
+      "message": 20,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/2/2_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3159",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55662",
+        "https://infosec.exchange/@sigdevel/116710224797830572"
+      ]
+    },
+    {
+      "title": "CVE-2025-52293: Out-of-bounds Read in GPAC/MP4Box via gf_hevc_read_sps_bs_internal on crafted HEVC SPS in MP4 file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/19",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-19/openwall-2026-06-13-19.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-19/openwall-2026-06-13-19.txt",
+      "date": "2026-06-13",
+      "message": 19,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/3/3_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3146",
+        "https://www.cve.org/CVERecord?id=CVE-2025-52293",
+        "https://infosec.exchange/@sigdevel/116710484148913883"
+      ]
+    },
+    {
+      "title": "CVE-2025-55651: NULL Pointer Dereference in GPAC/MP4Box via gf_isom_get_user_data_count on truncated MP4 input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/18",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-18/openwall-2026-06-13-18.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-18/openwall-2026-06-13-18.txt",
+      "date": "2026-06-13",
+      "message": 18,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/4/4_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3155",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55651",
+        "https://infosec.exchange/@sigdevel/116710512103919834"
+      ]
+    },
+    {
+      "title": "CVE-2025-55659: NULL Pointer Dereference in GPAC/MP4Box via ctts_box_write on crafted MP4 file with negative timestamps",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/17",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-17/openwall-2026-06-13-17.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-17/openwall-2026-06-13-17.txt",
+      "date": "2026-06-13",
+      "message": 17,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/5/5_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3156",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55659",
+        "https://infosec.exchange/@sigdevel/116710743410087676"
+      ]
+    },
+    {
+      "title": "CVE-2025-55657: NULL Pointer Dereference in GPAC/MP4Box via gf_odf_vvc_cfg_write_bs on crafted MP4 file with unsupported vvc16 box",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/16",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-16/openwall-2026-06-13-16.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-16/openwall-2026-06-13-16.txt",
+      "date": "2026-06-13",
+      "message": 16,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/6/6_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3157",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55657",
+        "https://infosec.exchange/@sigdevel/116710754169365223"
+      ]
+    },
+    {
+      "title": "CVE-2025-55660: Stack-based Buffer Overflow in GPAC/MP4Box via gf_opus_read_length on crafted MP4 file with malformed Opus packet",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/15",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-15/openwall-2026-06-13-15.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-15/openwall-2026-06-13-15.txt",
+      "date": "2026-06-13",
+      "message": 15,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/7/7_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3161",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55660",
+        "https://infosec.exchange/@sigdevel/116733892068649310"
+      ]
+    },
+    {
+      "title": "CVE-2025-55663: NULL Pointer Dereference in GPAC/MP4Box via Track_SetStreamDescriptor on crafted MP4 with unknown svcC box in av01",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/14",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-14/openwall-2026-06-13-14.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-14/openwall-2026-06-13-14.txt",
+      "date": "2026-06-13",
+      "message": 14,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/8/8_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3143",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55663",
+        "https://infosec.exchange/@sigdevel/116733899601128471"
+      ]
+    },
+    {
+      "title": "CVE-2025-55661: Heap-based Buffer Overflow in GPAC/MP4Box via gf_opus_parse_packet_header on crafted MP4 file with malformed Opus packet",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/13",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-13/openwall-2026-06-13-13.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-13/openwall-2026-06-13-13.txt",
+      "date": "2026-06-13",
+      "message": 13,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/9/9_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3160",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55661",
+        "https://infosec.exchange/@sigdevel/116733907390103029"
+      ]
+    },
+    {
+      "title": "CVE-2025-55650: Use-After-Free in GPAC/MP4Box via gf_svg_node_del on crafted MP4 file processed with -svg",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/12",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-12/openwall-2026-06-13-12.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-12/openwall-2026-06-13-12.txt",
+      "date": "2026-06-13",
+      "message": 12,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/10/10_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3162",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55650",
+        "https://infosec.exchange/@sigdevel/116733923605483597"
+      ]
+    },
+    {
+      "title": "CVE-2025-55649: NULL Pointer Dereference in GPAC/MP4Box via gf_media_map_esd on crafted MP4 with corrupted ESD data",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/11",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-11/openwall-2026-06-13-11.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-11/openwall-2026-06-13-11.txt",
+      "date": "2026-06-13",
+      "message": 11,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/11/11_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3183",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55649",
+        "https://infosec.exchange/@sigdevel/116736730620435563"
+      ]
+    },
+    {
+      "title": "CVE-2025-55648: Heap-based Buffer Overflow in GPAC/MP4Box via gf_opus_parse_packet_header on crafted MP4 with corrupted stsz data",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/10",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-10/openwall-2026-06-13-10.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-10/openwall-2026-06-13-10.txt",
+      "date": "2026-06-13",
+      "message": 10,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/12/12_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3190",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55648",
+        "https://infosec.exchange/@sigdevel/116736751244916557"
+      ]
+    },
+    {
+      "title": "CVE-2025-55641: NULL Pointer Dereference in GPAC/MP4Box via gf_isom_copy_sample_info on crafted MP4 file with corrupted SAI metadata",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/9",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-9/openwall-2026-06-13-9.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-9/openwall-2026-06-13-9.txt",
+      "date": "2026-06-13",
+      "message": 9,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/13/13_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3195",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55641",
+        "https://infosec.exchange/@sigdevel/116736775314270129"
+      ]
+    },
+    {
+      "title": "CVE-2025-55642: Divide by Zero in GPAC/MP4Box via avidmx_process on crafted AVI input with zero declared frames",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/8",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-8/openwall-2026-06-13-8.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-8/openwall-2026-06-13-8.txt",
+      "date": "2026-06-13",
+      "message": 8,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/14/14_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3196",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55642",
+        "https://infosec.exchange/@sigdevel/116736787186993437"
+      ]
+    },
+    {
+      "title": "CVE-2025-55647: Integer Overflow in GPAC/MP4Box via mp4_mux_cenc_insert_pssh on crafted MP4 with oversized PSSH metadata",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/7",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-7/openwall-2026-06-13-7.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-7/openwall-2026-06-13-7.txt",
+      "date": "2026-06-13",
+      "message": 7,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/15/15_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3235",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55647",
+        "https://infosec.exchange/@sigdevel/116736795058798433"
+      ]
+    },
+    {
+      "title": "CVE-2025-55645: Heap-based Buffer Overflow in GPAC/MP4Box via gf_cenc_set_pssh on crafted MP4 with oversized PSSH payload",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/6",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-6/openwall-2026-06-13-6.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-6/openwall-2026-06-13-6.txt",
+      "date": "2026-06-13",
+      "message": 6,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/16/16_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3236",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55645",
+        "https://infosec.exchange/@sigdevel/116736802253007654"
+      ]
+    },
+    {
+      "title": "CVE-2025-55643: NULL Pointer Dereference in GPAC/MP4Box via TrackWriter handling on crafted MP4 with malformed mvcC/stsz metadata during DASH segmentation",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/5",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-5/openwall-2026-06-13-5.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-5/openwall-2026-06-13-5.txt",
+      "date": "2026-06-13",
+      "message": 5,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/17/17_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3240",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55643",
+        "https://infosec.exchange/@sigdevel/116736819671963019"
+      ]
+    },
+    {
+      "title": "CVE-2025-55652: Heap-based Buffer Overflow in GPAC/MP4Box via gf_isom_vp_config_new on crafted MP4 with malformed VP codec configuration",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/4",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-4/openwall-2026-06-13-4.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-4/openwall-2026-06-13-4.txt",
+      "date": "2026-06-13",
+      "message": 4,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/18/18_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3242",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55652",
+        "https://infosec.exchange/@sigdevel/116736829161374790"
+      ]
+    },
+    {
+      "title": "CVE-2025-55644: Use-After-Free in GPAC/MP4Box via gf_node_get_tag on crafted MP4 file with invalid BIFS GlobalQuantizer command",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/13/3",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-3/openwall-2026-06-13-3.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-13-3/openwall-2026-06-13-3.txt",
+      "date": "2026-06-13",
+      "message": 3,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/20/20_poc.mp4"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3246",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-55644",
+        "https://infosec.exchange/@sigdevel/116736836762980573"
+      ]
+    },
+    {
+      "title": "CVE-2025-60495: NULL Pointer Dereference in GPAC/MP4Box via gf_media_get_color_info on crafted MP4 with inconsistent sample entry",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/01/13",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-13/openwall-2026-06-01-13.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-13/openwall-2026-06-01-13.txt",
+      "date": "2026-06-01",
+      "message": 13,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/66/66_gf_media_get_color_info_media_tools_isom_tools_c_979"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3335",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-60495",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60495"
+      ]
+    },
+    {
+      "title": "CVE-2025-60486: Use-After-Free in GPAC/MP4Box via dasher_process on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/01/12",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-12/openwall-2026-06-01-12.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-12/openwall-2026-06-01-12.txt",
+      "date": "2026-06-01",
+      "message": 12,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/53/53_dasher_process_filters_dasher_c_9445"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3314",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-60486",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60486"
+      ]
+    },
+    {
+      "title": "CVE-2025-60485: NULL Pointer Dereference in GPAC/MP4Box via gf_isom_apple_set_tag_ex on crafted MP4 with corrupted esds box",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/01/11",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-11/openwall-2026-06-01-11.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-11/openwall-2026-06-01-11.txt",
+      "date": "2026-06-01",
+      "message": 11,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/52/52_gf_isom_apple_set_tag_ex_isomedia_isom_write_c_6309"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3323",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-60485",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60485"
+      ]
+    },
+    {
+      "title": "CVE-2025-55664: Heap-based Buffer Overflow in GPAC/MP4Box via m2tsdmx_send_packet on crafted MPEG-2 TS file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/01/10",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-10/openwall-2026-06-01-10.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-10/openwall-2026-06-01-10.txt",
+      "date": "2026-06-01",
+      "message": 10,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/51/51_m2tsdmx_send_packet_filters_dmx_m2ts_c_916"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3310",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-55664",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55664"
+      ]
+    },
+    {
+      "title": "CVE-2025-60483: NULL Pointer Dereference in GPAC/MP4Box via gf_ac4_pres_b_4_back_channels_present on crafted AC-4 stream",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/01/9",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-9/openwall-2026-06-01-9.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-9/openwall-2026-06-01-9.txt",
+      "date": "2026-06-01",
+      "message": 9,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/49/49_gf_ac4_pres_b_4_back_channels_present_media_tools_av_parsers_c_15703"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3302",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-60483",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60483"
+      ]
+    },
+    {
+      "title": "CVE-2025-60481: NULL Pointer Dereference in GPAC/MP4Box via gf_odf_ac4_cfg_dsi_v1 on crafted AC-4 stream",
+      "url": "https://www.openwall.com/lists/oss-security/2026/06/01/8",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-8/openwall-2026-06-01-8.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-06-01-8/openwall-2026-06-01-8.txt",
+      "date": "2026-06-01",
+      "message": 8,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/45/45_gf_odf_ac4_cfg_dsi_v1_odf_descriptors_c_2148"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3296",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-60481",
+        "https://www.cve.org/CVERecord?id=CVE-2025-60481"
+      ]
+    },
+    {
+      "title": "CVE-2025-70103: Heap-based Buffer Overflow in libjxl/cjxl via jxl::extras::DecodeImagePNM on crafted PBM file",
+      "url": "https://www.openwall.com/lists/oss-security/2026/05/30/7",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-05-30-7/openwall-2026-05-30-7.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-05-30-7/openwall-2026-05-30-7.txt",
+      "date": "2026-05-30",
+      "message": 7,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/libjxl/2025/2/2_PBM_lib_extras_dec_pnm_cc_554"
+      ],
+      "references": [
+        "https://github.com/libjxl/libjxl/issues/4337",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-70103",
+        "https://infosec.exchange/@sigdevel/116642233929409910"
+      ]
+    },
+    {
+      "title": "CVE-2025-70116: NULL Pointer Dereference in GPAC/MP4Box via gf_media_map_esd on truncated MP4 input",
+      "url": "https://www.openwall.com/lists/oss-security/2026/05/30/2",
+      "imageUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-05-30-2/openwall-2026-05-30-2.png",
+      "textUrl": "https://raw.githubusercontent.com/sigdevel/sigdevel/master/generated/openwall-cves/openwall-2026-05-30-2/openwall-2026-05-30-2.txt",
+      "date": "2026-05-30",
+      "message": 2,
+      "poc": [
+        "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/68/68_gf_media_map_esd_media_tools_isom_tools_c_1364"
+      ],
+      "references": [
+        "https://github.com/gpac/gpac/issues/3345",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-70116",
+        "https://infosec.exchange/@sigdevel/116624563750949972"
+      ]
+    }
+  ]
+}

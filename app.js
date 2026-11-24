@@ -224,13 +224,7 @@ function SidebarNav({
   }, /*#__PURE__*/React.createElement("span", {
     className: "nav-dot",
     "aria-hidden": "true"
-  }), p.label[tweaks.lang])), /*#__PURE__*/React.createElement("a", {
-    href: "/disclosures/",
-    onClick: () => setMobileOpen(false)
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "nav-dot",
-    "aria-hidden": "true"
-  }), "BDU / CVE"), PAGES.slice(2).map(p => /*#__PURE__*/React.createElement("a", {
+  }), p.label[tweaks.lang])), PAGES.slice(2).map(p => /*#__PURE__*/React.createElement("a", {
     key: p.id,
     href: `#${p.id}`,
     "aria-current": page === p.id ? "page" : undefined,
@@ -740,17 +734,17 @@ function CvPage({
     className: "oss-desc"
   }, p.desc[lang]))))), /*#__PURE__*/React.createElement("section", {
     className: "section",
-    id: "disclosures-link"
+    id: "cve-feed-link"
   }, /*#__PURE__*/React.createElement("div", {
     className: "section-head"
   }, /*#__PURE__*/React.createElement("span", {
     className: "section-kicker"
-  }, "05"), /*#__PURE__*/React.createElement("h2", null, "BDU / CVE")), /*#__PURE__*/React.createElement("p", {
+  }, "05"), /*#__PURE__*/React.createElement("h2", null, "CVE RSS")), /*#__PURE__*/React.createElement("p", {
     className: "section-lead"
-  }, lang === "ru" ? "Реестр публичных раскрытий вынесен на отдельную страницу для удобного просмотра и обновления." : "The public disclosure registry has a dedicated page for easier browsing and maintenance."), /*#__PURE__*/React.createElement("a", {
+  }, lang === "ru" ? "\u041E\u0442\u0447\u0451\u0442\u044B \u043E CVE, PoC \u0438 \u0441\u0441\u044B\u043B\u043A\u0438 \u043D\u0430 \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B\u044B \u0432 \u043B\u0435\u043D\u0442\u0435 CVE RSS." : "Public CVE reports, proof-of-concept files and references in CVE RSS."), /*#__PURE__*/React.createElement("a", {
     className: "btn btn--primary",
-    href: "/disclosures/"
-  }, lang === "ru" ? "Открыть BDU / CVE →" : "Open BDU / CVE →")), /*#__PURE__*/React.createElement("section", {
+    href: "/rss/"
+  }, lang === "ru" ? "\u041E\u0442\u043A\u0440\u044B\u0442\u044C CVE RSS \u2192" : "Open CVE RSS \u2192")), /*#__PURE__*/React.createElement("section", {
     className: "section",
     id: "availability"
   }, /*#__PURE__*/React.createElement("div", {
